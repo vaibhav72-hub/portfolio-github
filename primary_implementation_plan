@@ -1,0 +1,395 @@
+# Vaibhav Pernole — Portfolio Website Implementation Plan (React + TypeScript)
+
+A production-grade, fully responsive single-page portfolio built with **Vite + React 18 + TypeScript**, styled with **vanilla CSS Modules** (no Tailwind dependency), and animated with **Framer Motion**.
+
+---
+
+## ⚠️ Prerequisite Check
+
+> [!CAUTION]
+> **Node.js and npm are not detected on this machine.** The PowerShell environment does not have `node` or `npx` in its PATH.
+> Before I can scaffold the Vite project, you must install **Node.js LTS (v20+)** from https://nodejs.org.
+> After installation, restart the terminal and let me know — I'll scaffold and build the entire project immediately.
+
+---
+
+## Tech Stack
+
+| Layer | Technology | Reason |
+|---|---|---|
+| Scaffold | **Vite 5** (`create-vite`) | Instant HMR, zero config, fastest dev server |
+| UI Framework | **React 18** | Component-based, reusable sections |
+| Language | **TypeScript 5** | Type-safe props, strict data models |
+| Styling | **CSS Modules** (vanilla) | Scoped styles, no runtime overhead, matches your `#0F172A` design system |
+| Animation | **Framer Motion 11** | Scroll-reveal, stagger, counter animations |
+| Icons | **Lucide React** | Crisp SVG icons, tree-shakable |
+| Fonts | **Google Fonts** (Inter + Outfit) | Via `<link>` in `index.html` |
+| Linting | **ESLint + TypeScript-ESLint** | Code quality, auto-fixable |
+| Formatting | **Prettier** | Consistent code style |
+| Deployment | **GitHub Pages / Vercel** | Zero-config static deploy |
+
+> [!NOTE]
+> Tailwind CSS is **not used** as per your preference for the design control a custom CSS system provides. CSS Modules give per-component scoping with zero class-name collisions.
+
+---
+
+## Design System Tokens
+
+All tokens live in `src/styles/tokens.css` (global CSS custom properties):
+
+```css
+:root {
+  /* Backgrounds */
+  --bg-primary:    #0F172A;
+  --bg-secondary:  #1E293B;
+  --bg-tertiary:   #334155;
+
+  /* Accents */
+  --accent-cyan:   #06B6D4;
+  --accent-emerald:#10B981;
+  --accent-glow:   rgba(6,182,212,0.15);
+
+  /* Typography */
+  --text-primary:  #F1F5F9;
+  --text-secondary:#94A3B8;
+  --text-muted:    #64748B;
+
+  /* Fonts */
+  --font-heading:  'Outfit', sans-serif;
+  --font-body:     'Inter', sans-serif;
+
+  /* Spacing & Shape */
+  --radius-sm:  8px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --shadow-glow: 0 0 24px rgba(6,182,212,0.25);
+}
+```
+
+---
+
+## Complete File & Folder Architecture
+
+```
+d:\Portfolio\
+├── public/
+│   ├── favicon.ico
+│   ├── resume.pdf                  ← User drops actual CV here
+│   └── og-image.png               ← Social share thumbnail
+├── src/
+│   ├── main.tsx                   ← React DOM entry point
+│   ├── App.tsx                    ← Root component, section composition
+│   ├── vite-env.d.ts
+│   │
+│   ├── styles/
+│   │   ├── tokens.css             ← Global design tokens (CSS custom properties)
+│   │   ├── global.css             ← Reset, base typography, smooth-scroll
+│   │   └── animations.css         ← Keyframe definitions reused across components
+│   │
+│   ├── types/
+│   │   └── index.ts               ← Shared TypeScript interfaces & types
+│   │
+│   ├── data/
+│   │   ├── skills.ts              ← Skills matrix data
+│   │   ├── experience.ts          ← Work experience data
+│   │   ├── projects.ts            ← Project case studies data
+│   │   └── certifications.ts      ← Certifications data
+│   │
+│   ├── hooks/
+│   │   ├── useScrollSpy.ts        ← Active nav link tracking
+│   │   └── useAnimatedCounter.ts  ← Animated number counter hook
+│   │
+│   ├── components/
+│   │   ├── ui/                    ← Pure reusable primitives
+│   │   │   ├── Button/
+│   │   │   │   ├── Button.tsx
+│   │   │   │   └── Button.module.css
+│   │   │   ├── Badge/
+│   │   │   │   ├── Badge.tsx
+│   │   │   │   └── Badge.module.css
+│   │   │   ├── Card/
+│   │   │   │   ├── Card.tsx
+│   │   │   │   └── Card.module.css
+│   │   │   └── SectionWrapper/    ← Scroll-reveal wrapper using Framer Motion
+│   │   │       ├── SectionWrapper.tsx
+│   │   │       └── SectionWrapper.module.css
+│   │   │
+│   │   └── layout/               ← Structural layout components
+│   │       ├── Navbar/
+│   │       │   ├── Navbar.tsx
+│   │       │   └── Navbar.module.css
+│   │       └── Footer/
+│   │           ├── Footer.tsx
+│   │           └── Footer.module.css
+│   │
+│   └── sections/                 ← One component per page section
+│       ├── Hero/
+│       │   ├── Hero.tsx
+│       │   └── Hero.module.css
+│       ├── About/
+│       │   ├── About.tsx
+│       │   └── About.module.css
+│       ├── Skills/
+│       │   ├── Skills.tsx
+│       │   └── Skills.module.css
+│       ├── Experience/
+│       │   ├── Experience.tsx
+│       │   └── Experience.module.css
+│       ├── Projects/
+│       │   ├── Projects.tsx
+│       │   ├── ProjectCard.tsx
+│       │   └── Projects.module.css
+│       ├── Certifications/
+│       │   ├── Certifications.tsx
+│       │   └── Certifications.module.css
+│       └── Contact/
+│           ├── Contact.tsx
+│           └── Contact.module.css
+│
+├── index.html                    ← Vite entry, meta/SEO tags, font imports
+├── vite.config.ts
+├── tsconfig.json
+├── tsconfig.node.json
+├── .eslintrc.cjs
+├── .prettierrc
+└── package.json
+```
+
+---
+
+## TypeScript Data Models (`src/types/index.ts`)
+
+```typescript
+export interface Skill {
+  category: string;
+  icon: string;
+  color: 'cyan' | 'emerald';
+  items: string[];
+}
+
+export interface ExperienceItem {
+  role: string;
+  company: string;
+  period: string;
+  bullets: { text: string; metric?: string }[];
+}
+
+export interface Project {
+  title: string;
+  overview: string;
+  problem: string;
+  stack: string[];
+  deliverables: string[];
+  githubUrl?: string;
+  liveUrl?: string;
+  accentColor: 'cyan' | 'emerald';
+}
+
+export interface Certification {
+  issuer: string;
+  title: string;
+  level?: string;
+  badgeColor: 'cyan' | 'emerald' | 'slate';
+}
+
+export interface MetricStat {
+  value: string;
+  label: string;
+  suffix?: string;
+}
+```
+
+---
+
+## Section-by-Section Component Breakdown
+
+### `<Navbar />`
+- Fixed top, `backdrop-filter: blur(12px)`, transparent → frosted-glass on scroll
+- Logo: `"VP | Data & AI"` with cyan monogram accent
+- Links: About · Skills · Experience · Projects · Credentials · Contact
+- CTA cluster: `[View Resume]` (PDF download) + `[Get in Touch]` (smooth scroll)
+- Mobile: hamburger → slide-down drawer, closes on link click
+- Hook: `useScrollSpy` highlights the active section link
+
+### `<Hero />`
+- 100vh, two-column (text left, SVG graphic right)
+- Left column (staggered Framer Motion entry):
+  - Chip: `"B.Tech AI & ML | Data Analyst & BI Developer"`
+  - `<h1>`: "Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models."
+  - Sub-headline paragraph
+  - **Metrics Bar** — three `MetricCard` components with `useAnimatedCounter`:
+    - `40%` Reduction in verification time
+    - `35%` Efficiency boost in KPI reporting
+    - `🌍` Asia · Europe · Middle East
+  - CTA: `[Download Resume]` + `[Explore Projects]`
+- Right column: animated SVG (data pipeline / node graph) using CSS keyframes
+- Background: dark base + subtle animated dot-grid pattern
+
+### `<About />`
+- Two-column: bio text left, info card right
+- Bio: concise 3-paragraph executive summary
+- Info card shows: Education, CGPA, University, Graduation, Languages
+- Framer Motion fade-in-left / fade-in-right on scroll entry
+
+### `<Skills />`
+- `<h2>` "Technical Skills Matrix"
+- 5 category cards in a responsive CSS Grid (`repeat(auto-fit, minmax(280px, 1fr))`)
+- Each card: category name + icon header, then skill `.badge` chips
+- Categories: Core Programming · Data Engineering · BI & Analytics · AI/ML/GenAI · Developer Tools
+- Hover: card border transitions to cyan glow, chips scale + brighten
+
+### `<Experience />`
+- Timeline layout: left vertical line (2px cyan), role cards offset right
+- Card header: role, company (linked), period badge
+- 4 STAR bullets, bold metrics highlighted in `--accent-cyan`
+- Expandable "Show Details" toggle (Framer Motion `AnimatePresence` height animation)
+
+### `<Projects />`
+- `<h2>` "Featured Work"
+- 2-column grid of `<ProjectCard />`
+- Each `ProjectCard`:
+  - Top 4px gradient border (cyan → emerald)
+  - Sections: Problem → Tech Stack (badge chips) → Key Deliverables (bullet list) → Link buttons (GitHub, Live Demo)
+  - Hover: `translateY(-8px)` + `--shadow-glow`
+
+### `<Certifications />`
+- `<h2>` "Credentials"
+- 4-column responsive grid (2-col on tablet, 1-col mobile)
+- Cert card: issuer logo placeholder, cert name, level badge, verified ✓ icon
+- MeitY & IBM cards: elevated with a subtle cyan top-border
+
+### `<Contact />`
+- Two-column: form left, info right
+- Form fields: Name, Work Email, Company / Role, Message textarea
+- TypeScript-typed form state with `useState`
+- Validation: required, email regex, min message length
+- Inline error states with `aria-describedby` for accessibility
+- Submit: `mailto:` link trigger + success toast notification
+- Right panel: location, email, phone, LinkedIn — each as an icon + link row
+- Availability callout: `"Currently open to full-time Data Analyst / ML Engineer roles"`
+
+### `<Footer />`
+- 3-column: Brand tagline · Quick links · Social icons (GitHub, LinkedIn, Email)
+- Copyright © 2026 Vaibhav Pernole
+- Back-to-top button (appears after 300px scroll, smooth-scrolls to `#top`)
+
+---
+
+## Animations Strategy (Framer Motion)
+
+| Animation | Component | Trigger |
+|---|---|---|
+| Staggered fade-up | Hero text blocks | On mount |
+| Typewriter effect | Hero `<h1>` | On mount |
+| Animated counter | Hero metrics (40%, 35%) | `useInView` |
+| Scroll-reveal fade+slide | Every section | `useInView` (once) |
+| Stagger children | Skill cards, cert grid | `useInView` |
+| Height collapse | Experience bullet expand | Click toggle |
+| Hover lift + glow | Project cards | `whileHover` |
+| Page exit/enter | None (SPA, no routing) | — |
+
+`SectionWrapper` wraps each section and applies `initial`, `whileInView`, `viewport={{ once: true }}` so animations fire once on first scroll-into-view.
+
+---
+
+## npm Dependencies
+
+```json
+{
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "framer-motion": "^11.0.0",
+    "lucide-react": "^0.400.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitejs/plugin-react": "^4.3.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.3.0",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
+```
+
+---
+
+## Scaffold Commands (Run after Node.js is installed)
+
+```bash
+# 1. Scaffold Vite + React + TypeScript
+npx -y create-vite@latest ./ --template react-ts
+
+# 2. Install dependencies
+npm install
+npm install framer-motion lucide-react
+
+# 3. Install dev tools
+npm install -D prettier eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin
+
+# 4. Start dev server
+npm run dev
+```
+
+---
+
+## SEO & Accessibility Checklist
+
+- [x] Single `<h1>` in Hero, proper `h2` per section, `h3` for sub-items
+- [x] All images/icons have `alt` or `aria-label`
+- [x] `aria-expanded` on collapsible experience bullets
+- [x] `aria-live="polite"` on form error messages
+- [x] `role="navigation"` on `<nav>`, `role="main"` on `<main>`
+- [x] `prefers-reduced-motion` disables Framer Motion via `useReducedMotion()`
+- [x] Color contrast ≥ 4.5:1 for all text
+- [x] `focus-visible` rings on all interactive elements
+- [x] Open Graph + Twitter Card meta tags in `index.html`
+- [x] JSON-LD `Person` structured data schema
+- [x] Semantic `<header>`, `<nav>`, `<main>`, `<section>`, `<footer>`
+
+---
+
+## Verification Plan
+
+### Build Verification
+```bash
+npm run build        # TypeScript compile + Vite production bundle
+npm run preview      # Serve production build locally
+```
+
+### Manual Checks
+1. **Responsive**: Resize from 320px → 1440px, confirm all grid reflows
+2. **Navigation**: Every nav link smoothly scrolls to the correct section, active link updates
+3. **Resume Download**: `[Download Resume]` triggers PDF download
+4. **Animations**: Counters animate on load, sections reveal on scroll
+5. **Form**: Invalid submit shows inline errors; valid submit shows toast
+6. **Keyboard**: Tab through all interactive elements, confirm focus rings visible
+7. **Lighthouse**: Target Performance ≥ 95, Accessibility 100, SEO 100
+
+---
+
+## Open Questions
+
+> [!IMPORTANT]
+> **Node.js Required**: `node` and `npm` are not found in the current PowerShell session. Please install Node.js LTS v20+ from https://nodejs.org and restart your terminal. I will scaffold and build everything immediately after.
+
+> [!NOTE]
+> **Resume PDF**: Do you have a `resume.pdf` to drop into `public/`? If not, the download button will link to a placeholder.
+
+> [!NOTE]
+> **Project Links**: Do you have GitHub URLs or a Power BI live link for the two featured projects? I'll embed real links; otherwise they'll be styled placeholder buttons.
+
+> [!NOTE]
+> **Profile Photo**: Would you like a profile photo in the About section? If yes, please provide the image file. Otherwise I'll render a styled **VP** monogram avatar.
+
+> [!NOTE]
+> **Contact Form**: Default is `mailto:` trigger (no server needed). If you want real email delivery, I can integrate **Formspree** (free tier, just a form `action` URL) — no backend code needed.
