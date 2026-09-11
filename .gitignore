@@ -24,5 +24,4 @@ dist-ssr
 *.sw?
 
 
-# pdf file ignore 
-*.pdf
+# pdf file ignore
