@@ -137,7 +137,7 @@ export default function App() {
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
           </div>
-          <a href="/resume.pdf" download="Vaibhav_Pernole_Resume.pdf" className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem" }}>
+          <a href={`${import.meta.env.BASE_URL}resume.pdf`} download="Vaibhav_Pernole_Resume.pdf" className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem" }}>
             Resume <Download className="w-4 h-4" />
           </a>
         </div>
