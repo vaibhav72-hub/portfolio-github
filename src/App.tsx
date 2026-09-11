@@ -153,7 +153,7 @@ export default function App() {
       <nav>
         <div className="container nav-content">
           <a href="#" className="logo" style={{ color: "var(--text-primary)", fontWeight: "bold", fontSize: "1.2rem" }}>
-            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)">| Data & AI</span>
+            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)" }}>| Data & AI</span>
           </a>
           <div className="nav-links">
             <a href="#about">About</a>
