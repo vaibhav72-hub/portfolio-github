@@ -90,10 +90,36 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [status, setStatus] = useState('');
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = `mailto:vaibhavpernole72@gmail.com?subject=Portfolio Contact from ${formState.name}&body=${formState.message}`;
+    setStatus('Sending...');
+    
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'YOUR_ACCESS_KEY_HERE', // Get your key at https://web3forms.com/
+          name: formState.name,
+          email: formState.email,
+          message: formState.message,
+        }),
+      });
+
+      if (response.ok) {
+        setStatus('Message sent successfully!');
+        setFormState({ name: '', email: '', message: '' });
+      } else {
+        setStatus('Failed to send message.');
+      }
+    } catch (error) {
+      setStatus('An error occurred. Please try again.');
+    }
   };
 
   return (
