@@ -122,13 +122,38 @@ export default function App() {
     }
   };
 
+  const handleDownloadResume = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      // Fetch the file and create a blob URL to force the browser to download it
+      // rather than opening it in the built-in PDF viewer.
+      const fileUrl = `${import.meta.env.BASE_URL}resume.pdf`;
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(blob);
+      
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'Vaibhav_Pernole_Resume.pdf';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Cleanup
+      window.URL.revokeObjectURL(blobUrl);
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Download failed, falling back to opening in new tab", error);
+      window.open(`${import.meta.env.BASE_URL}resume.pdf`, '_blank');
+    }
+  };
+
   return (
     <div className="app-container">
       {/* Navigation */}
       <nav>
         <div className="container nav-content">
           <a href="#" className="logo" style={{ color: "var(--text-primary)", fontWeight: "bold", fontSize: "1.2rem" }}>
-            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)" }}>| Data & AI</span>
+            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)">| Data & AI</span>
           </a>
           <div className="nav-links">
             <a href="#about">About</a>
@@ -137,7 +162,7 @@ export default function App() {
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
           </div>
-          <a href={`${import.meta.env.BASE_URL}resume.pdf`} download="Vaibhav_Pernole_Resume.pdf" className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem" }}>
+          <a href={`${import.meta.env.BASE_URL}resume.pdf`} onClick={handleDownloadResume} className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem" }}>
             Resume <Download className="w-4 h-4" />
           </a>
         </div>
