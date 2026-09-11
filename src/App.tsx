@@ -104,7 +104,7 @@ export default function App() {
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          access_key: 'YOUR_ACCESS_KEY_HERE', // Get your key at https://web3forms.com/
+          access_key: '4f35a6eb-9fe4-4dd1-b772-9d7127d316a2',
           name: formState.name,
           email: formState.email,
           message: formState.message,
