@@ -315,7 +315,19 @@ export default function App() {
                 style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", resize: "vertical" }} 
               ></textarea>
             </div>
-            <button type="submit" className="btn-primary" style={{ marginTop: "8px" }}>Send Message</button>
+            <button 
+              type="submit" 
+              className="btn-primary" 
+              style={{ marginTop: "8px", opacity: status === 'Sending...' ? 0.7 : 1 }}
+              disabled={status === 'Sending...'}
+            >
+              {status === 'Sending...' ? 'Sending...' : 'Send Message'}
+            </button>
+            {status && status !== 'Sending...' && (
+              <p style={{ marginTop: "8px", fontSize: "0.9rem", color: status.includes('successfully') ? "var(--accent-emerald)" : "#ef4444" }}>
+                {status}
+              </p>
+            )}
           </form>
 
           <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
