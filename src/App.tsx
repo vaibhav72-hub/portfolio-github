@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Download, ArrowRight, ExternalLink, Mail, MapPin, 
-  Phone, Award, Briefcase, Code, Database, LineChart, Cpu, Terminal
+  Phone, Award, Code, Database, LineChart, Cpu, Terminal
 } from 'lucide-react';
 import './index.css';
 
@@ -253,7 +253,7 @@ export default function App() {
         <div className="grid-2">
           {CERTS.map((cert, idx) => (
             <div key={idx} className="glass-card" style={{ display: "flex", alignItems: "center", gap: "16px", padding: "20px" }}>
-              <Award className="w-8 h-8 text-[#10B981]" flexShrink={0} />
+              <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
               <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert}</p>
             </div>
           ))}
