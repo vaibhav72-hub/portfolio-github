@@ -176,7 +176,7 @@ export default function App() {
             style={{ maxWidth: "800px" }}
           >
             <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
-            <h1 style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)", marginBottom: "24px" }}>
+            <h1 style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px" }}>
               Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
             </h1>
             <p style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
@@ -198,7 +198,7 @@ export default function App() {
               </div>
             </div>
 
-            <div style={{ display: "flex", gap: "16px" }}>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <a href="#projects" className="btn-primary">Explore Projects <ArrowRight className="w-5 h-5" /></a>
               <a href="#contact" className="btn-secondary">Get in Touch</a>
             </div>
