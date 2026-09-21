@@ -51,7 +51,7 @@ const PROJECTS = [
     deliverables: [
       "Bridges communication barriers by converting real-time video gestures into speech and text streams."
     ],
-    githubUrl: "#",
+    githubUrl: "https://github.com/vaibhav72-hub/Deaf-Mute-Language-Translator-Using-Machine-Learning-",
     liveUrl: "#"
   },
   {
