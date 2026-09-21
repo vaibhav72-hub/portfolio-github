@@ -67,10 +67,11 @@ const PROJECTS = [
 ];
 
 const CERTS = [
-  "MeitY: Essentials of Solution Development in IT (NSQF Level 5)",
-  "IBM SkillsBuild: Introduction to Generative AI",
-  "FutureSkills Prime: Data Processing and Visualization",
-  "Foundations: Certificate Course in C & C++"
+  { title: "SmartBridge & Google for Developers: Applied Data Science", link: "/SmartBridge_Certificate.html" },
+  { title: "MeitY: Essentials of Solution Development in IT (NSQF Level 5)" },
+  { title: "IBM SkillsBuild: Introduction to Generative AI" },
+  { title: "FutureSkills Prime: Data Processing and Visualization" },
+  { title: "Foundations: Certificate Course in C & C++" }
 ];
 
 // --- Components ---
@@ -309,9 +310,16 @@ export default function App() {
         <h2 className="section-title">Credentials <span>& Certifications</span></h2>
         <div className="grid-2">
           {CERTS.map((cert, idx) => (
-            <div key={idx} className="glass-card" style={{ display: "flex", alignItems: "center", gap: "16px", padding: "20px" }}>
-              <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
-              <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert}</p>
+            <div key={idx} className="glass-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+                <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
+                <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert.title}</p>
+              </div>
+              {cert.link && (
+                <a href={cert.link} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "6px 12px", fontSize: "0.8rem", flexShrink: 0 }}>
+                  View
+                </a>
+              )}
             </div>
           ))}
         </div>
