@@ -265,6 +265,12 @@ export default function App() {
             <li>Consolidated multi-region trade data across Asia, Europe, and the Middle East to steer executive B2B vendor-sourcing decisions.</li>
             <li>Centralized fragmented trade records in MySQL, guaranteeing high data integrity for scalable global benchmarking.</li>
           </ul>
+          
+          <div style={{ marginTop: "24px" }}>
+            <a href={`${import.meta.env.BASE_URL}GVTO_Certificate.pdf`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "8px" }}>
+              <Award className="w-4 h-4" /> View Certificate
+            </a>
+          </div>
         </div>
       </SectionWrapper>
 
