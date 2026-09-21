@@ -45,7 +45,7 @@ const SKILLS = [
 
 const PROJECTS = [
   {
-    title: "Deaf-Mute Sign Language Translator",
+    title: "Deaf-Mute Language Translator Using Machine Learning",
     problem: "Real-time two-way sign-to-speech/text translation system.",
     stack: ["Python", "OpenCV", "Deep Learning", "Audio Transcription"],
     deliverables: [
