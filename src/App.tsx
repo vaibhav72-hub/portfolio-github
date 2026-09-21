@@ -357,7 +357,7 @@ export default function App() {
 
           <div className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <h3 style={{ color: "var(--text-primary)" }}>Contact Information</h3>
-            <p style={{ color: "var(--accent-cyan)", fontWeight: "500" }}>Currently open to Full-Time Data Analyst / ML Engineer opportunities.</p>
+            <p style={{ color: "var(--accent-cyan)", fontWeight: "500" }}>Currently open to Full-Time Data Analyst / AI Engineer/ ML Engineer opportunities.</p>
             
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <MapPin className="w-6 h-6 text-[#94A3B8]" />
