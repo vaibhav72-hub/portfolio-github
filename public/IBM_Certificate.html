@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBM SkillsBuild Completion Certificate</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&display=swap');
+        
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        .certificate-container {
+            background-color: #f4f4f4;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            position: relative;
+            color: #161616;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            background-color: #c6c6c6;
+            padding: 30px 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ibm-logo {
+            font-weight: 700;
+            font-size: 28px;
+            color: #161616;
+            flex: 1;
+        }
+
+        .ibm-logo span {
+            font-weight: 400;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 400;
+            color: #393939;
+            flex: 2;
+        }
+
+        .body-section {
+            background-color: #f4f4f4;
+            padding: 60px 40px;
+            display: flex;
+            position: relative;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* The yellow ribbon graphic */
+        .medal-icon {
+            position: absolute;
+            left: 80px;
+            top: 60px;
+            width: 80px;
+            height: 80px;
+            border: 10px solid #f1c21b;
+            border-radius: 50%;
+        }
+
+        .medal-ribbon-left {
+            position: absolute;
+            left: 80px;
+            top: 140px;
+            width: 25px;
+            height: 50px;
+            background-color: #f1c21b;
+        }
+
+        .medal-ribbon-right {
+            position: absolute;
+            left: 135px;
+            top: 140px;
+            width: 25px;
+            height: 50px;
+            background-color: #f1c21b;
+        }
+
+        /* SVG overlay for ribbon cut */
+        .medal-icon-container {
+            position: absolute;
+            left: 80px;
+            top: 70px;
+            width: 100px;
+        }
+
+        .presented-to {
+            font-size: 20px;
+            color: #393939;
+            margin-bottom: 20px;
+        }
+
+        .name {
+            font-size: 36px;
+            font-weight: 400;
+            color: #161616;
+            margin-bottom: 40px;
+        }
+
+        .for-completion {
+            font-size: 20px;
+            color: #393939;
+            margin-bottom: 15px;
+        }
+
+        .course-title {
+            font-size: 42px;
+            font-weight: 700;
+            color: #161616;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .course-id {
+            font-size: 18px;
+            color: #525252;
+            margin-bottom: 30px;
+        }
+
+        .adobe-note {
+            font-size: 14px;
+            color: #525252;
+            margin-top: 20px;
+        }
+
+        .footer {
+            background-color: #c6c6c6;
+            padding: 25px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-size: 16px;
+            color: #161616;
+            font-weight: 600;
+        }
+
+        .footer-text span {
+            font-weight: 400;
+            color: #393939;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            .medal-icon-container {
+                position: relative;
+                left: auto;
+                top: auto;
+                margin-bottom: 40px;
+            }
+            .footer {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="certificate-container">
+        <div class="header">
+            <div class="ibm-logo">IBM <span>SkillsBuild</span></div>
+            <div class="header-title">Completion Certificate</div>
+        </div>
+
+        <div class="body-section">
+            <div class="medal-icon-container">
+                <svg width="100" height="150" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="35" stroke="#f1c21b" stroke-width="12"/>
+                    <path d="M28 85 L28 140 L50 125 L72 140 L72 85" fill="#f1c21b"/>
+                    <circle cx="50" cy="50" r="28" fill="#f4f4f4"/>
+                    <path d="M28 85 L28 140 L50 125 L72 140 L72 85" fill="#f4f4f4" transform="scale(0.7) translate(22, 45)"/>
+                </svg>
+            </div>
+
+            <div style="z-index: 10;">
+                <div class="presented-to">This certificate is presented to</div>
+                <div class="name">Vaibhav Pernole</div>
+                
+                <div class="for-completion">for the completion of</div>
+                <div class="course-title">Introduction to Generative AI</div>
+                <div class="course-id">(ALM-COURSE_4058859)</div>
+
+                <div class="adobe-note">According to the Adobe Learning Manager system of record</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">Completion date: <span>11 Feb 2026 (GMT)</span></div>
+            <div class="footer-text">Learning hours: <span>4 hrs</span></div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -69,7 +69,7 @@ const PROJECTS = [
 const CERTS = [
   { title: "SmartBridge & Google for Developers: Applied Data Science", link: "/SmartBridge_Certificate.html" },
   { title: "MeitY: Essentials of Solution Development in IT (NSQF Level 5)" },
-  { title: "IBM SkillsBuild: Introduction to Generative AI" },
+  { title: "IBM SkillsBuild: Introduction to Generative AI", link: "/IBM_Certificate.html" },
   { title: "FutureSkills Prime: Data Processing and Visualization" },
   { title: "Foundations: Certificate Course in C & C++" }
 ];
