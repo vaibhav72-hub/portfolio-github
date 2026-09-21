@@ -267,7 +267,7 @@ export default function App() {
           </ul>
           
           <div style={{ marginTop: "24px" }}>
-            <a href={`${import.meta.env.BASE_URL}GVTO_Certificate.pdf`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "8px" }}>
+            <a href={`${import.meta.env.BASE_URL}GVTO_Certificate.html`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "8px" }}>
               <Award className="w-4 h-4" /> View Certificate
             </a>
           </div>
