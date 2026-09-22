@@ -62,7 +62,7 @@ const PROJECTS = [
       "Candlestick charts, custom indicators, and dynamic risk/return KPI tracking."
     ],
     githubUrl: "#",
-    liveUrl: "#"
+    liveUrl: "https://docs.google.com/videos/d/1839sHttZkKYNBbr4zWHYiQgyP4SiFF-i5-nXZq9brTY/play?usp=sharing"
   }
 ];
 
@@ -297,7 +297,7 @@ export default function App() {
                 <a href={project.githubUrl} className="btn-secondary" style={{ padding: "8px 16px" }}>
                   <GithubIcon className="w-4 h-4" /> Code
                 </a>
-                <a href={project.liveUrl} className="btn-primary" style={{ padding: "8px 16px" }}>
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px" }}>
                   <ExternalLink className="w-4 h-4" /> Live Demo
                 </a>
               </div>
