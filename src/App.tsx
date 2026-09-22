@@ -72,7 +72,7 @@ const PROJECTS = [
       "Improves network security through AI-driven anomaly detection and intelligent threat monitoring."
     ],
     githubUrl: "https://github.com/vaibhav72-hub/AI-Enhanced-Intrusion-Detection-System-main",
-    liveUrl: "#"
+    liveUrl: "https://drive.google.com/file/d/1KlyNJ3lcaGRObGtk4BoqAS_iylgCqpFh/view?usp=sharing"
   }
 ];
 
