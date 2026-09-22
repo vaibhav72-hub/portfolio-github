@@ -214,6 +214,22 @@ nav {
   }
   
   .glass-card {
-    padding: 24px;
+    padding: 20px;
+  }
+  
+  /* Force wrap on flex containers with long text on mobile */
+  .cert-card {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  
+  /* Break long URLs or emails */
+  a {
+    word-break: break-word;
+  }
+
+  /* Make logo and download button scale better */
+  .nav-content {
+    gap: 12px;
   }
 }

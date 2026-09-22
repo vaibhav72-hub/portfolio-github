@@ -303,7 +303,7 @@ export default function App() {
                 {project.deliverables.map((d, i) => <li key={i}>{d}</li>)}
               </ul>
               
-              <div style={{ display: "flex", gap: "12px" }}>
+              <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 {project.githubUrl !== "#" && (
                   <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px" }}>
                     <GithubIcon className="w-4 h-4" /> Code
@@ -325,7 +325,7 @@ export default function App() {
         <h2 className="section-title">Credentials <span>& Certifications</span></h2>
         <div className="grid-2">
           {CERTS.map((cert, idx) => (
-            <div key={idx} className="glass-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
+            <div key={idx} className="glass-card cert-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                 <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
                 <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert.title}</p>
