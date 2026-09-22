@@ -51,7 +51,7 @@ const PROJECTS = [
       "Automatically identifies plant diseases from uploaded images for early diagnosis and treatment."
     ],
     githubUrl: "https://github.com/vaibhav72-hub/plant_disease_detection.git",
-    liveUrl: "https://odd-eyes-melt.loca.lt/"
+    liveUrl: "https://plant-disease-detection-n6iz.onrender.com/"
   },
   {
     title: "Deaf-Mute Language Translator Using Machine Learning",
