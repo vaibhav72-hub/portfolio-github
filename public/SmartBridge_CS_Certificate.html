@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Completion Certificate - SmartBridge</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .certificate-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 900px;
+            padding: 50px 70px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+            color: #333;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #e5e7eb;
+        }
+
+        /* Abstract blue shapes */
+        .corner-tl {
+            position: absolute;
+            top: 0; left: 0;
+            width: 150px; height: 150px;
+            background: linear-gradient(135deg, #0284c7 50%, transparent 50%);
+        }
+        
+        .corner-br {
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 150px; height: 150px;
+            background: linear-gradient(-45deg, #0f172a 50%, transparent 50%);
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .logo-box {
+            text-align: center;
+        }
+
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e3a8a;
+        }
+
+        .logo-subtext {
+            font-size: 11px;
+            color: #0ea5e9;
+            font-weight: 600;
+        }
+
+        .title-container {
+            margin: 30px 0 50px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            color: #fff;
+            background-color: #1e62a1;
+            padding: 10px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .content {
+            font-size: 16px;
+            line-height: 2.2;
+            margin: 0;
+        }
+
+        .highlight-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: #000;
+            border-bottom: 1px solid #333;
+            padding: 0 50px;
+            display: inline-block;
+            margin: 0 10px;
+        }
+
+        .highlight-course {
+            font-weight: 700;
+            color: #000;
+            font-size: 18px;
+            border-bottom: 1px solid #333;
+            padding: 0 20px;
+            display: inline-block;
+            margin: 0 5px;
+        }
+
+        .swayam-note {
+            margin-top: 30px;
+            color: #111;
+            font-size: 16px;
+        }
+
+        .cert-id {
+            margin-top: 40px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        .footer {
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding: 0 40px;
+        }
+
+        .date-section {
+            text-align: center;
+        }
+        
+        .date-value {
+            font-weight: 700;
+            font-size: 18px;
+            color: #000;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            width: 150px;
+        }
+        
+        .date-label {
+            font-weight: 600;
+            color: #000;
+        }
+
+        .signature {
+            text-align: center;
+        }
+
+        .signature-line {
+            width: 220px;
+            border-top: 1px solid #ccc;
+            padding-top: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            color: #000;
+            margin-top: 40px;
+        }
+
+        .signature-title {
+            font-size: 13px;
+            color: #555;
+            font-weight: 400;
+            display: block;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                gap: 50px;
+                align-items: center;
+            }
+            .title {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="certificate-container">
+        <div class="corner-tl"></div>
+        <div class="corner-br"></div>
+        
+        <div class="header">
+            <div class="logo-box">
+                <div class="logo-text">SMARTBRIDGE</div>
+                <div class="logo-subtext">Let's Bridge the Gap</div>
+            </div>
+        </div>
+
+        <div class="title-container">
+            <div class="title">Course Completion Certificate</div>
+        </div>
+
+        <div class="content">
+            This is to certify that <span class="highlight-name">Vaibhav Pernole</span><br>
+            has successfully completed the Credit Course on <span class="highlight-course">Cyber Security Analyst</span> conducted by<br>
+            <strong>SmartBridge</strong> from <strong>18 May 2026</strong> to <strong>17 June 2026</strong>. During this period, the candidate has fulfilled all<br>
+            academic and project requirements associated with this course.
+        </div>
+
+        <div class="swayam-note">
+            (This course is listed on <strong>Swayam Plus</strong> with NCrF Level <strong>5.0</strong>)
+        </div>
+
+        <div class="cert-id">
+            Certificate ID: CC-CS-2026-32734
+        </div>
+
+        <div class="footer">
+            <div class="date-section">
+                <div class="date-value">July 02, 2026</div>
+                <div class="date-label">Issued Date</div>
+            </div>
+            
+            <!-- Medal Placeholder -->
+            <div style="width: 80px; height: 100px; position: relative;">
+                <div style="width: 70px; height: 70px; background-color: #f59e0b; border-radius: 50%; border: 4px solid #fbbf24; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: absolute; top: 0; left: 5px; z-index: 2;"></div>
+                <div style="width: 30px; height: 40px; background-color: #10b981; position: absolute; bottom: 0; left: 15px; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);"></div>
+                <div style="width: 30px; height: 40px; background-color: #047857; position: absolute; bottom: 0; right: 15px; clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%);"></div>
+            </div>
+
+            <div class="signature">
+                <div class="signature-line">
+                    Amarendar Katkam
+                    <span class="signature-title">Founder & CEO, SmartBridge</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

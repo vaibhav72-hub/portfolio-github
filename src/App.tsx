@@ -69,6 +69,7 @@ const PROJECTS = [
 const CERTS = [
   { title: "SmartBridge & Google for Developers: Artificial Intelligence", link: "/SmartBridge_Certificate.html" },
   { title: "SmartBridge & Google for Developers: Cloud Practitioner", link: "/SmartBridge_CP_Certificate.html" },
+  { title: "SmartBridge & Google for Developers: Cyber Security Analyst", link: "/SmartBridge_CS_Certificate.html" },
   { title: "MeitY: Essentials of Solution Development in IT (NSQF Level 5)", link: "/MeitY_Certificate.html" },
   { title: "IBM SkillsBuild: Introduction to Generative AI", link: "/IBM_Certificate.html" },
   { title: "FutureSkills Prime: Data Processing and Visualization" },
