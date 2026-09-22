@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { 
   Download, ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
@@ -85,37 +84,39 @@ const CERTS = [
   { title: "Disha Computer Institute: Certificate Course in C & C++", link: "/Disha_Certificate.html" }
 ];
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 }
-  }
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-};
-
 // --- Components ---
 const SectionWrapper = ({ children, id, className = "" }: { children: React.ReactNode, id: string, className?: string }) => (
   <section id={id} className={`section ${className}`}>
-    <motion.div 
-      variants={staggerContainer}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.1 }}
-      className="container"
-    >
+    <div className="container">
       {children}
-    </motion.div>
+    </div>
   </section>
 );
 
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          (entry.target as HTMLElement).style.opacity = '1';
+          (entry.target as HTMLElement).style.transform = 'translateY(0)';
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => {
+      (el as HTMLElement).style.opacity = '0';
+      (el as HTMLElement).style.transform = 'translateY(30px)';
+      (el as HTMLElement).style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -150,8 +151,6 @@ export default function App() {
   const handleDownloadResume = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
-      // Fetch the file and create a blob URL to force the browser to download it
-      // rather than opening it in the built-in PDF viewer.
       const fileUrl = `${import.meta.env.BASE_URL}resume.pdf`;
       const response = await fetch(fileUrl);
       const blob = await response.blob();
@@ -163,7 +162,6 @@ export default function App() {
       document.body.appendChild(link);
       link.click();
       
-      // Cleanup
       window.URL.revokeObjectURL(blobUrl);
       document.body.removeChild(link);
     } catch (error) {
@@ -198,20 +196,16 @@ export default function App() {
         <div className="blob blob-1"></div>
         <div className="blob blob-2"></div>
         <div className="container">
-          <motion.div 
-            variants={staggerContainer}
-            initial="hidden" animate="show"
-            style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}
-          >
-            <motion.div variants={itemVariants} className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</motion.div>
-            <motion.h1 variants={itemVariants} className="text-gradient" style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px" }}>
+          <div className="reveal" style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
+            <div className="badge reveal" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
+            <h1 className="text-gradient reveal" style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px" }}>
               Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
-            </motion.h1>
-            <motion.p variants={itemVariants} style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
+            </h1>
+            <p className="reveal" style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
               Bridging raw data and executive strategy with automated Python workflows, DAX-modeled Power BI analytics, and end-to-end Machine Learning.
-            </motion.p>
+            </p>
             
-            <motion.div variants={itemVariants} className="grid-3" style={{ marginBottom: "40px" }}>
+            <div className="grid-3 reveal" style={{ marginBottom: "40px" }}>
               <div className="glass-card floating-element" style={{ padding: "20px", textAlign: "center", animationDelay: "0s" }}>
                 <h3 style={{ fontSize: "2.5rem", color: "var(--accent-cyan)" }}>40%</h3>
                 <p style={{ fontSize: "0.9rem" }}>Reduction in verification time</p>
@@ -224,21 +218,21 @@ export default function App() {
                 <h3 style={{ fontSize: "2.5rem", color: "var(--text-primary)" }}>Global</h3>
                 <p style={{ fontSize: "0.9rem" }}>Scope across Asia, Europe & Middle East</p>
               </div>
-            </motion.div>
+            </div>
 
-            <motion.div variants={itemVariants} style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <div className="reveal" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <a href="#projects" className="btn-primary">Explore Projects <ArrowRight className="w-5 h-5" /></a>
               <a href="#contact" className="btn-secondary">Get in Touch</a>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* About Section */}
       <SectionWrapper id="about">
-        <motion.h2 variants={itemVariants} className="section-title">Executive <span>Summary</span></motion.h2>
+        <h2 className="section-title reveal">Executive <span>Summary</span></h2>
         <div className="grid-2">
-          <motion.div variants={itemVariants} className="glass-card">
+          <div className="glass-card reveal">
             <h3 style={{ marginBottom: "16px", color: "var(--text-primary)" }}>Professional Bio</h3>
             <p style={{ marginBottom: "16px" }}>
               Strong foundation in relational database management (MySQL) and automated REST API pipelines. Expertise in translating multi-regional trade benchmarks into executive-level B2B dashboards.
@@ -246,8 +240,8 @@ export default function App() {
             <p>
               I specialize in bridging the gap between raw data and actionable business strategy, delivering high-impact solutions through clean architecture and robust ML models.
             </p>
-          </motion.div>
-          <motion.div variants={itemVariants} className="glass-card">
+          </div>
+          <div className="glass-card reveal">
             <h3 style={{ marginBottom: "16px", color: "var(--text-primary)" }}>Fast Facts</h3>
             <ul style={{ listStyle: "none", display: "grid", gap: "12px" }}>
               <li><strong style={{ color: "var(--accent-cyan)" }}>Education:</strong> B.Tech in AI & ML</li>
@@ -255,16 +249,16 @@ export default function App() {
               <li><strong style={{ color: "var(--accent-cyan)" }}>CGPA:</strong> 7.8/10 (Graduating 2026)</li>
               <li><strong style={{ color: "var(--accent-cyan)" }}>Languages:</strong> English, Hindi, Marathi</li>
             </ul>
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Skills Matrix */}
       <SectionWrapper id="skills">
-        <motion.h2 variants={itemVariants} className="section-title">Technical <span>Skills Matrix</span></motion.h2>
+        <h2 className="section-title reveal">Technical <span>Skills Matrix</span></h2>
         <div className="grid-3">
           {SKILLS.map((skill, idx) => (
-            <motion.div variants={itemVariants} key={idx} className="glass-card">
+            <div key={idx} className="glass-card reveal">
               {skill.icon}
               <h3 style={{ marginBottom: "16px" }}>{skill.category}</h3>
               <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "-4px" }}>
@@ -272,20 +266,20 @@ export default function App() {
                   <span key={item} className="badge">{item}</span>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Experience Section */}
       <SectionWrapper id="experience">
-        <motion.h2 variants={itemVariants} className="section-title">Work <span>Experience</span></motion.h2>
-        <motion.div variants={itemVariants} className="glass-card" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px" }}>
+        <h2 className="section-title reveal">Work <span>Experience</span></h2>
+        <div className="glass-card reveal" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px" }}>
           <div style={{ position: "absolute", left: "24px", top: "32px", bottom: "32px", width: "2px", background: "var(--accent-cyan)" }}></div>
           <div style={{ position: "absolute", left: "19px", top: "32px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent-cyan)", boxShadow: "0 0 10px var(--accent-cyan)" }}></div>
           
           <h3 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Data Analyst Intern</h3>
-          <p style={{ color: "var(--accent-emerald)", fontWeight: "500", marginBottom: "16px" }}>Global Vision Trade Organization (Aug 2025 â€“ Aug 2026)</p>
+          <p style={{ color: "var(--accent-emerald)", fontWeight: "500", marginBottom: "16px" }}>Global Vision Trade Organization (Aug 2025 – Aug 2026)</p>
           
           <ul style={{ paddingLeft: "20px", display: "grid", gap: "12px" }}>
             <li>Engineered automated data-cleaning and geospatial-enrichment pipelines in Python using REST APIs, cutting verification time by <strong style={{ color: "var(--accent-cyan)" }}>40%</strong> across logistics, automotive, and healthcare datasets.</li>
@@ -299,15 +293,15 @@ export default function App() {
               <Award className="w-4 h-4" /> View Certificate
             </a>
           </div>
-        </motion.div>
+        </div>
       </SectionWrapper>
 
       {/* Projects Section */}
       <SectionWrapper id="projects">
-        <motion.h2 variants={itemVariants} className="section-title">Featured <span>Work</span></motion.h2>
+        <h2 className="section-title reveal">Featured <span>Work</span></h2>
         <div className="grid-2">
           {PROJECTS.map((project, idx) => (
-            <motion.div variants={itemVariants} key={idx} className="glass-card" style={{ borderTop: "4px solid var(--accent-cyan)" }}>
+            <div key={idx} className="glass-card reveal" style={{ borderTop: "4px solid var(--accent-cyan)" }}>
               <h3 style={{ fontSize: "1.3rem", color: "var(--text-primary)", marginBottom: "8px" }}>{project.title}</h3>
               <p style={{ marginBottom: "16px", minHeight: "48px" }}>{project.problem}</p>
               
@@ -331,17 +325,17 @@ export default function App() {
                   </a>
                 )}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Certifications Section */}
       <SectionWrapper id="credentials">
-        <motion.h2 variants={itemVariants} className="section-title">Credentials <span>& Certifications</span></motion.h2>
+        <h2 className="section-title reveal">Credentials <span>& Certifications</span></h2>
         <div className="grid-2">
           {CERTS.map((cert, idx) => (
-            <motion.div variants={itemVariants} key={idx} className="glass-card cert-card" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
+            <div key={idx} className="glass-card cert-card reveal" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
                 <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
                 <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert.title}</p>
@@ -351,16 +345,16 @@ export default function App() {
                   View
                 </a>
               )}
-            </motion.div>
+            </div>
           ))}
         </div>
       </SectionWrapper>
 
       {/* Contact Section */}
       <SectionWrapper id="contact">
-        <motion.h2 variants={itemVariants} className="section-title">Get In <span>Touch</span></motion.h2>
+        <h2 className="section-title reveal">Get In <span>Touch</span></h2>
         <div className="grid-2">
-          <motion.form variants={itemVariants} onSubmit={handleFormSubmit} className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <form onSubmit={handleFormSubmit} className="glass-card reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div>
               <label style={{ display: "block", marginBottom: "8px" }}>Name</label>
               <input 
@@ -398,9 +392,9 @@ export default function App() {
                 {status}
               </p>
             )}
-          </motion.form>
+          </form>
 
-          <motion.div variants={itemVariants} className="glass-card" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+          <div className="glass-card reveal" style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
             <h3 style={{ color: "var(--text-primary)" }}>Contact Information</h3>
             <p style={{ color: "var(--accent-cyan)", fontWeight: "500" }}>Currently open to Full-Time Data Analyst / AI Engineer/ ML Engineer opportunities.</p>
             
@@ -420,14 +414,14 @@ export default function App() {
               <LinkedinIcon className="w-6 h-6 text-[#94A3B8]" />
               <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer">LinkedIn Profile</a>
             </div>
-          </motion.div>
+          </div>
         </div>
       </SectionWrapper>
 
       {/* Footer */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "40px 0", marginTop: "40px" }}>
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
-          <p>Copyright Â© 2026 Vaibhav Pernole.</p>
+          <p>Copyright © 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
             <a href="#" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
             <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
