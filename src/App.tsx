@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Download, ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
@@ -43,6 +43,16 @@ const SKILLS = [
 ];
 
 const PROJECTS = [
+  {
+    title: "Plant Disease Detection",
+    problem: "Deep learning based system to detect and classify plant diseases from leaf images.",
+    stack: ["Python", "Deep Learning", "Computer Vision"],
+    deliverables: [
+      "Automatically identifies plant diseases from uploaded images for early diagnosis and treatment."
+    ],
+    githubUrl: "https://github.com/vaibhav72-hub/plant_disease_detection.git",
+    liveUrl: "https://lazy-actors-love.loca.lt/"
+  },
   {
     title: "Deaf-Mute Language Translator Using Machine Learning",
     problem: "Real-time two-way sign-to-speech/text translation system.",
