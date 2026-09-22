@@ -316,7 +316,7 @@ export default function App() {
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 {project.githubUrl !== "#" && (
                   <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px" }}>
-                    <GithubIcon className="w-4 h-4" /> Code
+                    <GithubIcon className="w-4 h-4" /> View Code
                   </a>
                 )}
                 {project.liveUrl !== "#" && (
@@ -432,5 +432,6 @@ export default function App() {
     </div>
   );
 }
+
 
 
