@@ -63,6 +63,16 @@ const PROJECTS = [
     ],
     githubUrl: "#",
     liveUrl: "https://docs.google.com/videos/d/1839sHttZkKYNBbr4zWHYiQgyP4SiFF-i5-nXZq9brTY/play?usp=sharing"
+  },
+  {
+    title: "AI-Enhanced Intrusion Detection System",
+    problem: "Advanced threat detection system using Artificial Intelligence to identify network intrusions.",
+    stack: ["Python", "Machine Learning", "Cybersecurity", "AI"],
+    deliverables: [
+      "Improves network security through AI-driven anomaly detection and intelligent threat monitoring."
+    ],
+    githubUrl: "https://github.com/vaibhav72-hub/AI-Enhanced-Intrusion-Detection-System-main",
+    liveUrl: "#"
   }
 ];
 
