@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+ï»¿import React, { useState, useEffect } from 'react';
 import { 
   Download, ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
@@ -60,7 +60,7 @@ const PROJECTS = [
     deliverables: [
       "Candlestick charts, custom indicators, and dynamic risk/return KPI tracking."
     ],
-    githubUrl: "#",
+    githubUrl: "https://github.com/vaibhav72-hub/Stock-market-visualization.git",
     liveUrl: "https://docs.google.com/videos/d/1839sHttZkKYNBbr4zWHYiQgyP4SiFF-i5-nXZq9brTY/play?usp=sharing"
   },
   {
@@ -279,7 +279,7 @@ export default function App() {
           <div style={{ position: "absolute", left: "19px", top: "32px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent-cyan)", boxShadow: "0 0 10px var(--accent-cyan)" }}></div>
           
           <h3 style={{ fontSize: "1.5rem", color: "var(--text-primary)" }}>Data Analyst Intern</h3>
-          <p style={{ color: "var(--accent-emerald)", fontWeight: "500", marginBottom: "16px" }}>Global Vision Trade Organization (Aug 2025 – Aug 2026)</p>
+          <p style={{ color: "var(--accent-emerald)", fontWeight: "500", marginBottom: "16px" }}>Global Vision Trade Organization (Aug 2025 â€“ Aug 2026)</p>
           
           <ul style={{ paddingLeft: "20px", display: "grid", gap: "12px" }}>
             <li>Engineered automated data-cleaning and geospatial-enrichment pipelines in Python using REST APIs, cutting verification time by <strong style={{ color: "var(--accent-cyan)" }}>40%</strong> across logistics, automotive, and healthcare datasets.</li>
@@ -421,7 +421,7 @@ export default function App() {
       {/* Footer */}
       <footer style={{ borderTop: "1px solid rgba(255,255,255,0.05)", padding: "40px 0", marginTop: "40px" }}>
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
-          <p>Copyright © 2026 Vaibhav Pernole.</p>
+          <p>Copyright Â© 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
             <a href="#" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
             <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
@@ -432,3 +432,5 @@ export default function App() {
     </div>
   );
 }
+
+
