@@ -304,12 +304,16 @@ export default function App() {
               </ul>
               
               <div style={{ display: "flex", gap: "12px" }}>
-                <a href={project.githubUrl} className="btn-secondary" style={{ padding: "8px 16px" }}>
-                  <GithubIcon className="w-4 h-4" /> Code
-                </a>
-                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px" }}>
-                  <ExternalLink className="w-4 h-4" /> Live Demo
-                </a>
+                {project.githubUrl !== "#" && (
+                  <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px" }}>
+                    <GithubIcon className="w-4 h-4" /> Code
+                  </a>
+                )}
+                {project.liveUrl !== "#" && (
+                  <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px" }}>
+                    <ExternalLink className="w-4 h-4" /> Live Demo
+                  </a>
+                )}
               </div>
             </div>
           ))}
