@@ -61,7 +61,7 @@ const PROJECTS = [
       "Bridges communication barriers by converting real-time video gestures into speech and text streams."
     ],
     githubUrl: "https://github.com/vaibhav72-hub/Deaf-Mute-Language-Translator-Using-Machine-Learning-",
-    liveUrl: "#"
+    liveUrl: "https://vaibhav72-hub.github.io/Deaf-Mute-Language-Translator-Using-Machine-Learning-/portfolio/"
   },
   {
     title: "Stock Market Analytics & Trend Visualizer",
