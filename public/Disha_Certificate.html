@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate - Disha Computer Institute</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .certificate-container {
+            background-color: #fff;
+            width: 100%;
+            max-width: 800px;
+            padding: 50px 60px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+            color: #333;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+            background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .certificate-inner {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .sr-no {
+            font-size: 14px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .institute-info {
+            text-align: right;
+        }
+
+        .institute-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #b91c1c; /* Dark red */
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .institute-subtext {
+            font-size: 12px;
+            color: #475569;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .iso-text {
+            font-size: 10px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 36px;
+            color: #7f1d1d;
+            margin: 40px 0 20px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            color: #991b1b;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .content {
+            font-size: 16px;
+            line-height: 1.8;
+            margin: 0 20px 40px;
+            text-align: left;
+        }
+
+        .highlight-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 22px;
+            color: #000;
+            display: block;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .marks-table {
+            width: 100%;
+            max-width: 300px;
+            margin: 30px 0 30px auto;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .marks-table th {
+            background-color: #fcd34d;
+            color: #78350f;
+            padding: 8px 15px;
+            border: 1px solid #9ca3af;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .marks-table td {
+            padding: 8px 15px;
+            border: 1px solid #9ca3af;
+            background-color: #f9fafb;
+            color: #374151;
+        }
+        
+        .marks-table td:last-child {
+            text-align: right;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            text-align: left;
+            font-size: 12px;
+            color: #475569;
+            border-top: 1px solid #cbd5e1;
+            padding-top: 20px;
+        }
+        
+        .footer-col {
+            flex: 1;
+        }
+
+        .signature-block {
+            margin-top: 20px;
+        }
+
+        .signature-name {
+            font-weight: 700;
+            color: #000;
+            font-size: 13px;
+        }
+
+        .legend {
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .legend-title {
+            font-weight: 700;
+            color: #7f1d1d;
+            display: inline-block;
+            transform: rotate(-90deg);
+            transform-origin: left bottom;
+            width: 20px;
+            height: 60px;
+            vertical-align: bottom;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        .legend-items {
+            display: inline-block;
+            border-left: 2px solid #ef4444;
+            padding-left: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #991b1b;
+            line-height: 1.6;
+        }
+        
+        .legend-items span {
+            color: #ef4444;
+        }
+
+        @media (max-width: 600px) {
+            .header {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .institute-info, .sr-no {
+                text-align: center;
+            }
+            .footer {
+                flex-direction: column;
+                gap: 30px;
+                text-align: center;
+            }
+            .marks-table {
+                margin: 30px auto;
+            }
+            .legend {
+                text-align: center;
+            }
+            .legend-title {
+                transform: none;
+                width: auto;
+                height: auto;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .legend-items {
+                border-left: none;
+                border-top: 2px solid #ef4444;
+                padding-left: 0;
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="certificate-container">
+        <div class="certificate-inner">
+            <div class="header">
+                <div class="sr-no">Sr. No. D8617727377</div>
+                <div class="institute-info">
+                    <div class="iso-text">An ISO 9001:2015 Certified</div>
+                    <h1 class="institute-name">DISHA</h1>
+                    <div class="institute-subtext">COMPUTER INSTITUTE</div>
+                    <div style="font-size: 11px; color: #64748b; margin-top: 2px;">Experts in Computer Training</div>
+                </div>
+            </div>
+
+            <div class="title">CERTIFICATE</div>
+            <div class="subtitle">CERTIFICATE COURSE IN C C++</div>
+
+            <div class="content">
+                <span class="highlight-name">VAIBHAV RAJARAM PERNOLE</span>
+                has successfully passed the CERTIFICATE COURSE IN C C++<br>
+                by securing 72.5% from DISHA COMPUTER INSTITUTE.
+            </div>
+
+            <table class="marks-table">
+                <thead>
+                    <tr>
+                        <th colspan="2">MARKS OBTAINED</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>C</td>
+                        <td>65</td>
+                    </tr>
+                    <tr>
+                        <td>C++</td>
+                        <td>80</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="footer">
+                <div class="footer-col">
+                    <strong>VERIFIED CERTIFICATE DATE</strong><br>
+                    Issued Feb/26/2024
+                    
+                    <div class="signature-block">
+                        Signature Verified<br>
+                        Digitally Signed By <span class="signature-name">SHIVAJI LOHAKARE</span><br>
+                        Date: 02/26/2024 7:43:36 PM IST<br>
+                        Reason: Issuance of computer system generated digitally signed<br>
+                        certificate for Disha Computer Institute.
+                    </div>
+                </div>
+                
+                <div class="footer-col" style="text-align: right; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <strong>VERIFIED CERTIFICATE ID</strong><br>
+                        Sr No: D8617727377
+                    </div>
+                    
+                    <div class="legend" style="margin-top: 40px; text-align: right;">
+                        <div style="display: inline-flex; align-items: flex-end;">
+                            <div class="legend-title" style="transform: rotate(-90deg) translateX(10px); margin-right: -10px;">LEGEND</div>
+                            <div class="legend-items" style="text-align: left;">
+                                <span>|||||||||||||||||||||</span> 85 to 100 <strong>A+</strong><br>
+                                <span>||||||||||||||||||</span> 70 to 84 <strong>A</strong><br>
+                                <span>|||||||||||||||</span> 56 to 69 <strong>B+</strong><br>
+                                <span>||||||||||||</span> 40 to 55 <strong>B</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; font-size: 11px; color: #64748b; text-align: left;">
+                These marks are based on their given examination.<br>
+                To verify authenticity of the certificate please login to dishagroup.in
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -71,7 +71,7 @@ const CERTS = [
   { title: "MeitY: Essentials of Solution Development in IT (NSQF Level 5)" },
   { title: "IBM SkillsBuild: Introduction to Generative AI", link: "/IBM_Certificate.html" },
   { title: "FutureSkills Prime: Data Processing and Visualization" },
-  { title: "Foundations: Certificate Course in C & C++" }
+  { title: "Disha Computer Institute: Certificate Course in C & C++", link: "/Disha_Certificate.html" }
 ];
 
 // --- Components ---
