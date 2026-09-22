@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate - MeitY / FutureSkills Prime</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
+        
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Open Sans', sans-serif;
+            color: #333;
+        }
+
+        .cert-card {
+            background-color: #fff;
+            width: 100%;
+            max-width: 900px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 12px;
+            background: linear-gradient(90deg, #1e3a8a, #3b82f6, #fcd34d, #d97706);
+        }
+
+        .cert-top {
+            padding: 50px 60px 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+        
+        .logo-box {
+            display: flex;
+            align-items: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .logo-fsp {
+            color: #0284c7;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        .logo-fsp span { color: #dc2626; }
+        
+        .logo-meity {
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .logo-nasscom {
+            font-size: 12px;
+            font-weight: 700;
+            color: #b91c1c;
+        }
+
+        .title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            color: #1e3a8a;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            font-weight: 700;
+        }
+
+        .cert-text {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin: 15px 0;
+        }
+
+        .university {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-bottom: 15px;
+        }
+        
+        .course-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 15px 0;
+            color: #111;
+        }
+
+        .nos-text {
+            font-weight: 600;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 60px;
+            padding: 0 40px;
+        }
+
+        .cert-id {
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        .date {
+            font-weight: 700;
+            font-size: 13px;
+            border-bottom: 1px dashed #666;
+            padding-bottom: 2px;
+            display: inline-block;
+        }
+        
+        .signature {
+            text-align: center;
+        }
+        
+        .signature img {
+            height: 40px;
+        }
+        
+        .signature-line {
+            border-top: 1px dashed #666;
+            padding-top: 5px;
+            font-size: 11px;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Bottom section with borders mimicking the graphic */
+        .bottom-border {
+            height: 30px;
+            background-color: #1e3a8a;
+            width: 100%;
+        }
+
+        /* Scorecard Section */
+        .scorecard-container {
+            padding: 40px 60px;
+            display: flex;
+            gap: 40px;
+        }
+
+        .candidate-details {
+            flex: 1;
+        }
+
+        .candidate-title {
+            color: #60a5fa;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .details-table, .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .details-table td, .marks-table td, .marks-table th {
+            border: 1px solid #333;
+            padding: 10px;
+        }
+
+        .details-table td:first-child {
+            font-weight: 700;
+            width: 40%;
+            background-color: #f9fafb;
+        }
+
+        .marks-section {
+            flex: 2;
+        }
+        
+        .marks-title {
+            color: #60a5fa;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .marks-table th {
+            background-color: #e5e7eb;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .marks-table td:nth-child(2), .marks-table td:nth-child(3) {
+            text-align: center;
+        }
+        
+        .marks-table .total-row {
+            font-weight: 700;
+            background-color: #e5e7eb;
+        }
+
+        @media (max-width: 768px) {
+            .scorecard-container {
+                flex-direction: column;
+                padding: 30px;
+            }
+            .cert-top {
+                padding: 40px 20px;
+            }
+            .logos {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            .title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Certificate -->
+    <div class="cert-card">
+        <div class="cert-top">
+            <div class="logos">
+                <div class="logo-box">
+                    <div class="logo-fsp">futureskills<br><span>prime</span></div>
+                </div>
+                <div class="logo-box">
+                    <div class="logo-meity">
+                        MINISTRY OF<br>
+                        ELECTRONICS &<br>
+                        INFORMATION TECHNOLOGY<br>
+                        GOVERNMENT OF INDIA
+                    </div>
+                </div>
+                <div class="logo-box">
+                    <div class="logo-nasscom">IT - ITeS SSC<br>nasscom</div>
+                </div>
+            </div>
+
+            <div class="title">CERTIFICATE</div>
+            <div class="cert-text">This is to certify that</div>
+            
+            <div class="name">Vaibhav Pernole</div>
+            <div class="cert-text">Of</div>
+            <div class="university">Dy Patil Agriculture And Technical University</div>
+            
+            <div class="cert-text">has successfully completed the course on</div>
+            <div class="course-name">Experiential Learning</div>
+            <div class="cert-text">aligned to the following NOS</div>
+            
+            <div class="nos-text">"(SSC/N8149) Essentials of solution development in IT, NSQF Level 5"</div>
+
+            <div class="footer">
+                <div style="text-align: center; width: 100px;">
+                    <!-- Placeholder for QR code -->
+                    <div style="width: 80px; height: 80px; background-color: #e5e7eb; margin: 0 auto;"></div>
+                    <div class="cert-id">FSP/2025/03/5712325</div>
+                </div>
+                
+                <div style="text-align: center;">
+                    <div class="date">22/03/2025</div><br>
+                    <span style="font-size: 11px; color: #666;">Date of Issue</span>
+                </div>
+                
+                <div class="signature">
+                    <div style="font-family: 'Brush Script MT', cursive; font-size: 24px; color: #333; margin-bottom: 5px;">Dr. Abhilasha Gaur</div>
+                    <div class="signature-line">
+                        CEO, IT - ITeS Sector Skills<br>Council, nasscom
+                    </div>
+                </div>
+            </div>
+            
+            <div style="font-size: 10px; color: #666; margin-top: 30px;">Detailed Scorecard included</div>
+        </div>
+        <div class="bottom-border"></div>
+    </div>
+
+    <!-- Scorecard Section -->
+    <div class="cert-card" style="margin-top: 20px;">
+        <div style="padding: 20px 60px; display: flex; justify-content: space-between; border-bottom: 1px solid #eee;">
+            <div class="logo-fsp" style="font-size: 16px;">futureskills<br><span>prime</span></div>
+            <div class="logo-meity" style="font-size: 9px;">MINISTRY OF<br>ELECTRONICS &<br>INFORMATION TECHNOLOGY<br>GOVERNMENT OF INDIA</div>
+            <div class="logo-nasscom" style="font-size: 10px;">IT - ITeS SSC<br>nasscom</div>
+        </div>
+        
+        <div class="scorecard-container">
+            <div class="candidate-details">
+                <div class="candidate-title">Candidates Details</div>
+                <table class="details-table">
+                    <tr>
+                        <td>Candidate Name:</td>
+                        <td>Vaibhav Pernole</td>
+                    </tr>
+                    <tr>
+                        <td>Assessment Name:</td>
+                        <td>Experiential Learning</td>
+                    </tr>
+                    <tr>
+                        <td>Issue Date:</td>
+                        <td>22/03/2025</td>
+                    </tr>
+                    <tr>
+                        <td>Certification ID:</td>
+                        <td>FSP/2025/03/5712325</td>
+                    </tr>
+                </table>
+                <div style="text-align: center; margin-top: 30px;">
+                    <div style="width: 80px; height: 80px; background-color: #e5e7eb; margin: 0 auto;"></div>
+                    <div class="cert-id" style="margin-top: 5px;">FSP/2025/03/5712325</div>
+                </div>
+            </div>
+            
+            <div class="marks-section">
+                <div class="marks-title">Mark Sheet</div>
+                <table class="marks-table">
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Maximum<br>Marks</th>
+                            <th>Marks<br>Obtained</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Brainstorming and Ideation</td><td>10.00</td><td>9.00</td></tr>
+                        <tr><td>Requirements Gathering and Analysis</td><td>10.00</td><td>5.00</td></tr>
+                        <tr><td>Project Design</td><td>15.00</td><td>7.50</td></tr>
+                        <tr><td>Project Planning</td><td>5.00</td><td>3.00</td></tr>
+                        <tr><td>Project Development</td><td>15.00</td><td>12.50</td></tr>
+                        <tr><td>Project Testing</td><td>5.00</td><td>2.00</td></tr>
+                        <tr><td>Project Documentation</td><td>5.00</td><td>3.50</td></tr>
+                        <tr><td>Project Demonstration</td><td>5.00</td><td>5.00</td></tr>
+                        <tr><td>Grand Assessment</td><td>30.00</td><td>29.00</td></tr>
+                        <tr class="total-row"><td>Total</td><td>100.00</td><td>76.50</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="bottom-border" style="height: 20px;"></div>
+    </div>
+
+</body>
+</html>
