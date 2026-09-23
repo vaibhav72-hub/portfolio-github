@@ -4,6 +4,10 @@ import {
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
 } from 'lucide-react';
 import './index.css';
+import MagneticButton from './components/MagneticButton';
+import TiltCard from './components/TiltCard';
+import AnimatedText from './components/AnimatedText';
+import ParticleBackground from './components/ParticleBackground';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
@@ -195,22 +199,24 @@ export default function App() {
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
           </div>
-          <a href={`${import.meta.env.BASE_URL}resume.pdf`} onClick={handleDownloadResume} className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem" }}>
+          <MagneticButton as="a" href={`${import.meta.env.BASE_URL}resume.pdf`} onClick={handleDownloadResume} className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "flex", alignItems: "center", gap: "8px" }}>
             Resume <Download className="w-4 h-4" />
-          </a>
+          </MagneticButton>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden" }}>
-        <div className="blob blob-1"></div>
-        <div className="blob blob-2"></div>
+      <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden", position: "relative" }}>
+        <ParticleBackground />
         <div className="container">
           <div className="reveal" style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
             <div className="badge reveal" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
-            <h1 className="text-gradient reveal" style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px" }}>
-              Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
-            </h1>
+            <div style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.2 }}>
+              <AnimatedText 
+                text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
+                className="text-gradient" 
+              />
+            </div>
             <p className="reveal" style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
               Bridging raw data and executive strategy with automated Python workflows, DAX-modeled Power BI analytics, and end-to-end Machine Learning.
             </p>
@@ -231,8 +237,12 @@ export default function App() {
             </div>
 
             <div className="reveal" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-              <a href="#projects" className="btn-primary">Explore Projects <ArrowRight className="w-5 h-5" /></a>
-              <a href="#contact" className="btn-secondary">Get in Touch</a>
+              <MagneticButton as="a" href="#projects" className="btn-primary" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                Explore Projects <ArrowRight className="w-5 h-5" />
+              </MagneticButton>
+              <MagneticButton as="a" href="#contact" className="btn-secondary">
+                Get in Touch
+              </MagneticButton>
             </div>
           </div>
         </div>
@@ -268,7 +278,7 @@ export default function App() {
         <h2 className="section-title reveal">Technical <span>Skills Matrix</span></h2>
         <div className="grid-3">
           {SKILLS.map((skill, idx) => (
-            <div key={idx} className="glass-card reveal">
+            <TiltCard key={idx} className="glass-card reveal">
               {skill.icon}
               <h3 style={{ marginBottom: "16px" }}>{skill.category}</h3>
               <div style={{ display: "flex", flexWrap: "wrap", marginLeft: "-4px" }}>
@@ -276,7 +286,7 @@ export default function App() {
                   <span key={item} className="badge">{item}</span>
                 ))}
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </SectionWrapper>
@@ -311,7 +321,7 @@ export default function App() {
         <h2 className="section-title reveal">Featured <span>Work</span></h2>
         <div className="grid-2">
           {PROJECTS.map((project, idx) => (
-            <div key={idx} className="glass-card reveal" style={{ borderTop: "4px solid var(--accent-cyan)" }}>
+            <TiltCard key={idx} className="glass-card reveal" style={{ borderTop: "4px solid var(--accent-cyan)", height: "100%" }}>
               <h3 style={{ fontSize: "1.3rem", color: "var(--text-primary)", marginBottom: "8px" }}>{project.title}</h3>
               <p style={{ marginBottom: "16px", minHeight: "48px" }}>{project.problem}</p>
               
@@ -325,17 +335,17 @@ export default function App() {
               
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 {project.githubUrl !== "#" && (
-                  <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px" }}>
+                  <MagneticButton as="a" href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px" }}>
                     <GithubIcon className="w-4 h-4" /> View Code
-                  </a>
+                  </MagneticButton>
                 )}
                 {project.liveUrl !== "#" && (
-                  <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px" }}>
+                  <MagneticButton as="a" href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px" }}>
                     <ExternalLink className="w-4 h-4" /> Live Demo
-                  </a>
+                  </MagneticButton>
                 )}
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </SectionWrapper>
