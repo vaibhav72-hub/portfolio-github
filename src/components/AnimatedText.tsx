@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { motion, useInView, Variants } from 'framer-motion';
+import { motion, useInView, type Variants } from 'framer-motion';
 
 interface AnimatedTextProps {
   text: string;
