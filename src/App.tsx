@@ -8,6 +8,7 @@ import MagneticButton from './components/MagneticButton';
 import TiltCard from './components/TiltCard';
 import AnimatedText from './components/AnimatedText';
 import ParticleBackground from './components/ParticleBackground';
+import FlipCard, { type CertData } from './components/FlipCard';
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
@@ -89,13 +90,49 @@ const PROJECTS = [
   }
 ];
 
-const CERTS = [
-  { title: "SmartBridge & Google for Developers: Artificial Intelligence", link: "/SmartBridge_Certificate.html" },
-  { title: "SmartBridge & Google for Developers: Cloud Practitioner", link: "/SmartBridge_CP_Certificate.html" },
-  { title: "SmartBridge & Google for Developers: Cyber Security Analyst", link: "/SmartBridge_CS_Certificate.html" },
-  { title: "MeitY: Essentials of Solution Development in IT (NSQF Level 5)", link: "/MeitY_Certificate.html" },
-  { title: "IBM SkillsBuild: Introduction to Generative AI", link: "/IBM_Certificate.html" },
-  { title: "Disha Computer Institute: Certificate Course in C & C++", link: "/Disha_Certificate.html" }
+const CERTS: CertData[] = [
+  { 
+    title: "Artificial Intelligence", 
+    issuer: "SmartBridge & Google for Developers",
+    category: "AI & Machine Learning",
+    skills: ["Applied AI", "Deep Learning", "Neural Networks"],
+    link: `${import.meta.env.BASE_URL}SmartBridge_Certificate.html` 
+  },
+  { 
+    title: "Cloud Practitioner", 
+    issuer: "SmartBridge & Google for Developers",
+    category: "Cloud Computing",
+    skills: ["Google Cloud", "Cloud Infrastructure", "Deployment"],
+    link: `${import.meta.env.BASE_URL}SmartBridge_CP_Certificate.html` 
+  },
+  { 
+    title: "Cyber Security Analyst", 
+    issuer: "SmartBridge & Google for Developers",
+    category: "Cybersecurity",
+    skills: ["Threat Modeling", "Network Security", "Vulnerability Analysis"],
+    link: `${import.meta.env.BASE_URL}SmartBridge_CS_Certificate.html` 
+  },
+  { 
+    title: "Essentials of Solution Development in IT (NSQF Level 5)", 
+    issuer: "MeitY (Ministry of Electronics & IT)",
+    category: "Software Engineering",
+    skills: ["Solution Architecture", "SDLC", "Enterprise Systems"],
+    link: `${import.meta.env.BASE_URL}MeitY_Certificate.html` 
+  },
+  { 
+    title: "Introduction to Generative AI", 
+    issuer: "IBM SkillsBuild",
+    category: "Generative AI",
+    skills: ["LLMs", "Prompt Engineering", "AI Ethics"],
+    link: `${import.meta.env.BASE_URL}IBM_Certificate.html` 
+  },
+  { 
+    title: "Certificate Course in C & C++", 
+    issuer: "Disha Computer Institute",
+    category: "Core Programming",
+    skills: ["C / C++", "Object Oriented Design", "Data Structures"],
+    link: `${import.meta.env.BASE_URL}Disha_Certificate.html` 
+  }
 ];
 
 // --- Components ---
@@ -334,16 +371,8 @@ export default function App() {
         <h2 className="section-title reveal">Credentials <span>& Certifications</span></h2>
         <div className="grid-2">
           {CERTS.map((cert, idx) => (
-            <div key={idx} className="glass-card cert-card reveal" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", padding: "20px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
-                <Award className="w-8 h-8 text-[#10B981]" style={{ flexShrink: 0 }} />
-                <p style={{ fontWeight: "500", color: "var(--text-primary)" }}>{cert.title}</p>
-              </div>
-              {cert.link && (
-                <a href={cert.link} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "6px 12px", fontSize: "0.8rem", flexShrink: 0 }}>
-                  View
-                </a>
-              )}
+            <div key={idx} className="reveal" style={{ height: "100%" }}>
+              <FlipCard cert={cert} />
             </div>
           ))}
         </div>

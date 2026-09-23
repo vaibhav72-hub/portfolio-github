@@ -124,6 +124,20 @@ a {
               0 0 20px rgba(56, 189, 248, 0.15);
 }
 
+/* Flip Card Face Styles */
+.flip-card-face {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 .reveal {
   opacity: 0;
   transform: translateY(30px);
