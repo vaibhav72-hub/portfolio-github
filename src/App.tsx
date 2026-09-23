@@ -190,9 +190,9 @@ export default function App() {
         <div className="container">
           <div className="reveal" style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
             <div className="badge reveal" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
-            <div style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.2 }}>
+            <div style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <AnimatedText 
-                text="architecting scalable data pipelines, interactive bi ecosystems, and applied ml models." 
+                text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
                 className="text-gradient" 
               />
             </div>
