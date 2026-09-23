@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Download, ArrowRight, ExternalLink, Mail, MapPin, 
+  ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
 } from 'lucide-react';
 import './index.css';
@@ -162,27 +162,6 @@ export default function App() {
     }
   };
 
-  const handleDownloadResume = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    try {
-      const fileUrl = `${import.meta.env.BASE_URL}resume.pdf`;
-      const response = await fetch(fileUrl);
-      const blob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(blob);
-      
-      const link = document.createElement('a');
-      link.href = blobUrl;
-      link.download = 'Vaibhav_Pernole_Resume.pdf';
-      document.body.appendChild(link);
-      link.click();
-      
-      window.URL.revokeObjectURL(blobUrl);
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error("Download failed, falling back to opening in new tab", error);
-      window.open(`${import.meta.env.BASE_URL}resume.pdf`, '_blank');
-    }
-  };
 
   return (
     <div className="app-container">
@@ -199,8 +178,8 @@ export default function App() {
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
           </div>
-          <MagneticButton as="a" href={`${import.meta.env.BASE_URL}resume.pdf`} onClick={handleDownloadResume} className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "flex", alignItems: "center", gap: "8px" }}>
-            Resume <Download className="w-4 h-4" />
+          <MagneticButton as="a" href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "flex", alignItems: "center", gap: "8px" }}>
+            Resume
           </MagneticButton>
         </div>
       </nav>
@@ -213,7 +192,7 @@ export default function App() {
             <div className="badge reveal" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
             <div style={{ fontSize: "clamp(2rem, 8vw, 4rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.2 }}>
               <AnimatedText 
-                text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
+                text="architecting scalable data pipelines, interactive bi ecosystems, and applied ml models." 
                 className="text-gradient" 
               />
             </div>
