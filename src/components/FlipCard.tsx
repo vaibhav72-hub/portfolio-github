@@ -17,6 +17,7 @@ interface FlipCardProps {
 
 export default function FlipCard({ cert, className = "" }: FlipCardProps) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [hasInteracted, setHasInteracted] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.42);
 
@@ -42,6 +43,11 @@ export default function FlipCard({ cert, className = "" }: FlipCardProps) {
     return () => resizeObserver.disconnect();
   }, []);
 
+  const triggerFlip = () => {
+    setHasInteracted(true);
+    setIsFlipped(prev => !prev);
+  };
+
   return (
     <div
       ref={containerRef}
@@ -51,15 +57,18 @@ export default function FlipCard({ cert, className = "" }: FlipCardProps) {
         height: "270px",
         cursor: "pointer",
       }}
-      onMouseEnter={() => setIsFlipped(true)}
+      onMouseEnter={() => {
+        setHasInteracted(true);
+        setIsFlipped(true);
+      }}
       onMouseLeave={() => setIsFlipped(false)}
-      onClick={() => setIsFlipped(prev => !prev)}
+      onClick={triggerFlip}
       role="button"
       tabIndex={0}
       aria-label={`Certificate: ${cert.title}. Click to view certificate directly.`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
-          setIsFlipped(prev => !prev);
+          triggerFlip();
         }
       }}
     >
@@ -148,21 +157,38 @@ export default function FlipCard({ cert, className = "" }: FlipCardProps) {
               background: "#ffffff",
             }}
           >
-            <iframe
-              src={cert.link}
-              title={`Certificate - ${cert.title}`}
-              loading="lazy"
-              tabIndex={-1}
-              style={{
-                width: "880px",
-                height: "600px",
-                border: "none",
-                transform: `scale(${scale})`,
-                transformOrigin: "top left",
-                pointerEvents: "none",
-                display: "block",
-              }}
-            />
+            {hasInteracted ? (
+              <iframe
+                src={cert.link}
+                title={`Certificate - ${cert.title}`}
+                loading="lazy"
+                tabIndex={-1}
+                style={{
+                  width: "880px",
+                  height: "600px",
+                  border: "none",
+                  transform: `scale(${scale})`,
+                  transformOrigin: "top left",
+                  pointerEvents: "none",
+                  display: "block",
+                }}
+              />
+            ) : (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "#0f172a",
+                  color: "#94a3b8",
+                  fontSize: "0.85rem",
+                }}
+              >
+                Hover or click to view
+              </div>
+            )}
 
             {/* Top Overlay Bar with Direct Action & Flip Indicator */}
             <div

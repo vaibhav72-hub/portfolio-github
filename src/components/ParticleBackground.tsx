@@ -110,9 +110,12 @@ export default function ParticleBackground() {
       }
     }
 
+    let animationFrameId: number;
+
     const init = () => {
       particlesArray = [];
-      let numberOfParticles = (canvas.height * canvas.width) / 12000;
+      const calculatedCount = Math.floor((canvas.height * canvas.width) / 24000);
+      const numberOfParticles = Math.min(45, Math.max(20, calculatedCount));
       for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
         let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
@@ -125,23 +128,25 @@ export default function ParticleBackground() {
     };
 
     const animate = () => {
-      requestAnimationFrame(animate);
       ctx.clearRect(0, 0, innerWidth, innerHeight);
       for (let i = 0; i < particlesArray.length; i++) {
         particlesArray[i].update();
       }
       connect();
+      animationFrameId = requestAnimationFrame(animate);
     };
 
+    const maxDistanceSquared = 120 * 120;
+
     const connect = () => {
-      let opacityValue = 1;
       for (let a = 0; a < particlesArray.length; a++) {
-        for (let b = a; b < particlesArray.length; b++) {
-          let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x)) + 
-                         ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
-          if (distance < (canvas.width / 7) * (canvas.height / 7)) {
-            opacityValue = 1 - (distance / 20000);
-            ctx.strokeStyle = `rgba(6, 182, 212, ${opacityValue * 0.2})`;
+        for (let b = a + 1; b < particlesArray.length; b++) {
+          let dx = particlesArray[a].x - particlesArray[b].x;
+          let dy = particlesArray[a].y - particlesArray[b].y;
+          let distance = dx * dx + dy * dy;
+          if (distance < maxDistanceSquared) {
+            let opacityValue = (1 - (distance / maxDistanceSquared)) * 0.2;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${opacityValue})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
@@ -153,9 +158,10 @@ export default function ParticleBackground() {
     };
 
     init();
-    animate();
+    animationFrameId = requestAnimationFrame(animate);
 
     return () => {
+      cancelAnimationFrame(animationFrameId);
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('mouseout', handleMouseOut);

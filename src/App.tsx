@@ -194,7 +194,7 @@ export default function App() {
       } else {
         setStatus('Failed to send message.');
       }
-    } catch (error) {
+    } catch {
       setStatus('An error occurred. Please try again.');
     }
   };
@@ -225,19 +225,19 @@ export default function App() {
       <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden", position: "relative" }}>
         <ParticleBackground />
         <div className="container">
-          <div className="reveal" style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
-            <div className="badge reveal" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
+          <div style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
+            <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
             <div style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <AnimatedText 
                 text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
                 className="text-gradient" 
               />
             </div>
-            <p className="reveal" style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
+            <p style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
               Bridging raw data and executive strategy with automated Python workflows, DAX-modeled Power BI analytics, and end-to-end Machine Learning.
             </p>
             
-            <div className="grid-3 reveal" style={{ marginBottom: "40px" }}>
+            <div className="grid-3" style={{ marginBottom: "40px" }}>
               <div className="glass-card floating-element" style={{ padding: "20px", textAlign: "center", animationDelay: "0s" }}>
                 <h3 style={{ fontSize: "2.5rem", color: "var(--accent-cyan)" }}>40%</h3>
                 <p style={{ fontSize: "0.9rem" }}>Reduction in verification time</p>
@@ -252,7 +252,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="reveal" style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
               <MagneticButton as="a" href="#projects" className="btn-primary" style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                 Explore Projects <ArrowRight className="w-5 h-5" />
               </MagneticButton>

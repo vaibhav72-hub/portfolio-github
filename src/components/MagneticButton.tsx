@@ -11,13 +11,16 @@ interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonEleme
   onClick?: (e: any) => void;
 }
 
+const MotionButton = motion.button;
+const MotionAnchor = motion.a;
+
 export default function MagneticButton({ 
   children, 
   className = "", 
   as: Component = "button",
   ...props 
 }: MagneticButtonProps) {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef<any>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
   const handleMouse = (e: React.MouseEvent) => {
@@ -33,7 +36,7 @@ export default function MagneticButton({
     setPosition({ x: 0, y: 0 });
   };
 
-  const MotionComponent = motion.create(Component);
+  const MotionComponent = Component === 'a' ? MotionAnchor : MotionButton;
 
   return (
     <MotionComponent
@@ -43,7 +46,7 @@ export default function MagneticButton({
       animate={{ x: position.x, y: position.y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className={className}
-      {...props}
+      {...(props as any)}
     >
       {children}
     </MotionComponent>
