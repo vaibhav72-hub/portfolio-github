@@ -418,9 +418,20 @@ export default function App() {
             <h3 style={{ color: "var(--text-primary)" }}>Contact Information</h3>
             <p style={{ color: "var(--accent-cyan)", fontWeight: "500" }}>Currently open to Full-Time Data Analyst / AI Engineer/ ML Engineer opportunities.</p>
             
-            <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
               <MapPin className="w-6 h-6 text-[#94A3B8]" />
               <span>Kolhapur, Maharashtra, India</span>
+            </div>
+            <div style={{ width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", marginBottom: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d849.1595884663111!2d74.24456414355856!3d16.706052298920085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sin!4v1790140979241!5m2!1sen!2sin" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <Mail className="w-6 h-6 text-[#94A3B8]" />
@@ -428,7 +439,7 @@ export default function App() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <Phone className="w-6 h-6 text-[#94A3B8]" />
-              <a href="tel:+918600120032" style={{ color: "inherit", textDecoration: "none" }}>+91 8600120032</a>
+              <a href="tel:+918600120032">+91 8600120032</a>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <LinkedinIcon className="w-6 h-6 text-[#94A3B8]" />
