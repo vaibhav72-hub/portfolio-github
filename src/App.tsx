@@ -428,7 +428,7 @@ export default function App() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <Phone className="w-6 h-6 text-[#94A3B8]" />
-              <span>+91 8600120032</span>
+              <a href="tel:+918600120032" style={{ color: "inherit", textDecoration: "none" }}>+91 8600120032</a>
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <LinkedinIcon className="w-6 h-6 text-[#94A3B8]" />

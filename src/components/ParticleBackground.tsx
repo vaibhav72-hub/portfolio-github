@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 export default function ParticleBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -71,10 +71,10 @@ export default function ParticleBackground() {
 
       update() {
         // Move particles
-        if (this.x > canvas.width || this.x < 0) {
+        if (this.x > canvas!.width || this.x < 0) {
           this.directionX = -this.directionX;
         }
-        if (this.y > canvas.height || this.y < 0) {
+        if (this.y > canvas!.height || this.y < 0) {
           this.directionY = -this.directionY;
         }
         
@@ -85,7 +85,7 @@ export default function ParticleBackground() {
           let distance = Math.sqrt(dx*dx + dy*dy);
           
           if (distance < mouse.radius + this.size) {
-            if (mouse.x < this.x && this.x < canvas.width - this.size * 10) {
+            if (mouse.x < this.x && this.x < canvas!.width - this.size * 10) {
               this.x += 1;
               this.directionX = -this.directionX;
             }
@@ -93,7 +93,7 @@ export default function ParticleBackground() {
               this.x -= 1;
               this.directionX = -this.directionX;
             }
-            if (mouse.y < this.y && this.y < canvas.height - this.size * 10) {
+            if (mouse.y < this.y && this.y < canvas!.height - this.size * 10) {
               this.y += 1;
               this.directionY = -this.directionY;
             }
