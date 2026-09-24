@@ -25,16 +25,15 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
   const wordVariant: Variants = {
     visible: {
       opacity: 1,
-      y: 0,
+      filter: "blur(0px)",
       transition: {
-        type: "spring",
-        damping: 15,
-        stiffness: 60,
+        duration: 0.8,
+        ease: "easeOut",
       },
     },
     hidden: {
       opacity: 0,
-      y: 12,
+      filter: "blur(8px)",
     },
   };
 
@@ -51,7 +50,7 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
         <motion.span
           key={index}
           variants={wordVariant}
-          style={{ display: "inline-block", position: "relative", marginRight: "0.28em" }}
+          style={{ display: "inline-block", position: "relative", marginRight: "0.28em", willChange: "transform, opacity" }}
         >
           {word}
         </motion.span>
