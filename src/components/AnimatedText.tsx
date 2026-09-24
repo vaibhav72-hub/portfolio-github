@@ -18,7 +18,7 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.04, delayChildren: 0.02 },
+      transition: { staggerChildren: 0.12, delayChildren: 0.1 },
     },
   };
 
@@ -28,8 +28,8 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
       y: 0,
       transition: {
         type: "spring",
-        damping: 18,
-        stiffness: 140,
+        damping: 15,
+        stiffness: 60,
       },
     },
     hidden: {
@@ -41,17 +41,17 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
   return (
     <motion.div
       ref={ref}
-      style={{ display: "inline-block" }}
+      style={{ display: "flex", flexWrap: "wrap" }}
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className={className}
     >
       {words.map((word, index) => (
         <motion.span
           key={index}
           variants={wordVariant}
-          style={{ display: "inline-block", marginRight: "0.28em" }}
+          style={{ marginRight: "0.28em", paddingBottom: "0.1em" }}
+          className={className}
         >
           {word}
         </motion.span>

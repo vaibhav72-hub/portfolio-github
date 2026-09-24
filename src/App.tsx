@@ -9,7 +9,8 @@ import TiltCard from './components/TiltCard';
 import AnimatedText from './components/AnimatedText';
 import ParticleBackground from './components/ParticleBackground';
 import FlipCard, { type CertData } from './components/FlipCard';
-
+import AiCore3D from './components/AiCore3D';
+import CursorTrail from './components/CursorTrail';
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
@@ -202,6 +203,7 @@ export default function App() {
 
   return (
     <div className="app-container">
+      <CursorTrail />
       {/* Navigation */}
       <nav>
         <div className="container nav-content">
@@ -224,8 +226,8 @@ export default function App() {
       {/* Hero Section */}
       <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden", position: "relative" }}>
         <ParticleBackground />
-        <div className="container">
-          <div style={{ maxWidth: "800px", position: "relative", zIndex: 10 }}>
+        <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
+          <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
             <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
             <div style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <AnimatedText 
@@ -260,6 +262,10 @@ export default function App() {
                 Get in Touch
               </MagneticButton>
             </div>
+          </div>
+          
+          <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }} className="reveal">
+            <AiCore3D />
           </div>
         </div>
       </section>
