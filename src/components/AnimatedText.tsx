@@ -25,20 +25,23 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
   const wordVariant: Variants = {
     visible: {
       opacity: 1,
+      y: 0,
       transition: {
-        duration: 0.8,
-        ease: "easeOut"
+        type: "spring",
+        damping: 15,
+        stiffness: 60,
       },
     },
     hidden: {
       opacity: 0,
+      y: 12,
     },
   };
 
   return (
     <motion.div
       ref={ref}
-      style={{ display: "inline-block" }}
+      style={{ display: "inline-flex", flexWrap: "wrap" }}
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
@@ -48,7 +51,7 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
         <motion.span
           key={index}
           variants={wordVariant}
-          style={{ display: "inline-block", marginRight: "0.28em" }}
+          style={{ display: "inline-block", position: "relative", marginRight: "0.28em" }}
         >
           {word}
         </motion.span>
