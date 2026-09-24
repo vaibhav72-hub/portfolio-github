@@ -80,6 +80,7 @@ const ParticleSphere = () => {
             count={positions.length / 3}
             array={positions}
             itemSize={3}
+            args={[positions, 3]}
           />
         </bufferGeometry>
         <pointsMaterial size={0.06} color="#06B6D4" transparent opacity={0.8} />
@@ -93,12 +94,14 @@ const ParticleSphere = () => {
             count={linePositions.length / 3}
             array={linePositions}
             itemSize={3}
+            args={[linePositions, 3]}
           />
           <bufferAttribute
             attach="attributes-color"
             count={lineColors.length / 4}
             array={lineColors}
             itemSize={4}
+            args={[lineColors, 4]}
           />
         </bufferGeometry>
         <lineBasicMaterial vertexColors transparent depthWrite={false} blending={THREE.AdditiveBlending} />
