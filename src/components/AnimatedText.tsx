@@ -25,33 +25,30 @@ export default function AnimatedText({ text, className = "", once = true }: Anim
   const wordVariant: Variants = {
     visible: {
       opacity: 1,
-      y: 0,
       transition: {
-        type: "spring",
-        damping: 15,
-        stiffness: 60,
+        duration: 0.8,
+        ease: "easeOut"
       },
     },
     hidden: {
       opacity: 0,
-      y: 12,
     },
   };
 
   return (
     <motion.div
       ref={ref}
-      style={{ display: "flex", flexWrap: "wrap" }}
+      style={{ display: "inline-block" }}
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
+      className={className}
     >
       {words.map((word, index) => (
         <motion.span
           key={index}
           variants={wordVariant}
-          style={{ marginRight: "0.28em", paddingBottom: "0.1em" }}
-          className={className}
+          style={{ display: "inline-block", marginRight: "0.28em" }}
         >
           {word}
         </motion.span>
