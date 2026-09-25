@@ -468,7 +468,7 @@ export default function App() {
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
           <p>Copyright © 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
-            <a href="#" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
+            <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
             <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
             <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "8px" }}><Mail className="w-5 h-5" /></a>
           </div>
