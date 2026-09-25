@@ -434,11 +434,16 @@ export default function App() {
             
             <div style={{ display: "flex", alignItems: "center", gap: "16px", marginBottom: "16px" }}>
               <MapPin className="w-6 h-6 text-[#94A3B8]" />
-              <span>Kolhapur, Maharashtra, India</span>
+              <div>
+                <span style={{ display: "block" }}>Kolhapur, Maharashtra, India</span>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=16°42'21.8%22N+74°14'39.9%22E" target="_blank" rel="noreferrer" style={{ fontSize: "0.85rem", color: "var(--accent-cyan)", textDecoration: "underline", display: "inline-block", marginTop: "4px" }}>
+                  Get Directions
+                </a>
+              </div>
             </div>
             <div style={{ width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", marginBottom: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d849.1595884663111!2d74.24456414355856!3d16.706052298920085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2s!5e0!3m2!1sen!2sin!4v1790140979241!5m2!1sen!2sin" 
+                src="https://maps.google.com/maps?saddr=&daddr=16°42'21.8%22N+74°14'39.9%22E&hl=en&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
@@ -469,7 +474,7 @@ export default function App() {
           <p>Copyright © 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
             <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
-            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
+            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
             <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "8px" }}><Mail className="w-5 h-5" /></a>
           </div>
         </div>
