@@ -154,10 +154,6 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
         </bufferGeometry>
         <lineBasicMaterial ref={linesMaterialRef} vertexColors transparent depthWrite={false} blending={THREE.AdditiveBlending} />
       </lineSegments>
-
-      <Sphere args={[1.5, 32, 32]}>
-        <meshBasicMaterial color="#000000" transparent opacity={0.8} depthWrite={false} />
-      </Sphere>
     </group>
   );
 };
