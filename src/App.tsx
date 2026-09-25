@@ -443,7 +443,7 @@ export default function App() {
             </div>
             <div style={{ width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", marginBottom: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
               <iframe 
-                src="https://maps.google.com/maps?saddr=&daddr=16°42'21.8%22N+74°14'39.9%22E&hl=en&output=embed" 
+                src="https://maps.google.com/maps?q=16°42'21.8%22N%2074°14'39.9%22E&hl=en&z=16&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ border: 0 }} 
