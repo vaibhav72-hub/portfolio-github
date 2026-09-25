@@ -9,8 +9,9 @@ import TiltCard from './components/TiltCard';
 import AnimatedText from './components/AnimatedText';
 import ParticleBackground from './components/ParticleBackground';
 import FlipCard, { type CertData } from './components/FlipCard';
-import AiCore3D from './components/AiCore3D';
+import AiCore3D, { type AiStatus } from './components/AiCore3D';
 import CursorTrail from './components/CursorTrail';
+import SpotlightCommandBar from './components/SpotlightCommandBar';
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
@@ -148,6 +149,28 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
+  const [aiStatus, setAiStatus] = useState<AiStatus>('idle');
+
+  const handleAiIntent = (intent: string) => {
+    // If the intent is hero, scroll to top
+    if (intent === 'hero') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
+    // Otherwise scroll to the section
+    const element = document.getElementById(intent);
+    if (element) {
+      const navHeight = 80; // approximate nav height
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+  
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries, obs) => {
@@ -265,10 +288,13 @@ export default function App() {
           </div>
           
           <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }} className="reveal">
-            <AiCore3D />
+            <AiCore3D status={aiStatus} />
           </div>
         </div>
       </section>
+
+      {/* Spotlight Command Bar */}
+      <SpotlightCommandBar onStatusChange={setAiStatus} onIntentDecoded={handleAiIntent} />
 
       {/* About Section */}
       <SectionWrapper id="about">

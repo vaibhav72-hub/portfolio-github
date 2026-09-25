@@ -3,8 +3,30 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-const ParticleSphere = () => {
+export type AiStatus = 'idle' | 'listening' | 'thinking' | 'speaking';
+
+const getColorsForStatus = (status: AiStatus) => {
+  switch (status) {
+    case 'listening':
+      return new THREE.Color(0x10B981); // Emerald
+    case 'thinking':
+      return new THREE.Color(0xF59E0B); // Amber
+    case 'speaking':
+      return new THREE.Color(0x8B5CF6); // Violet
+    case 'idle':
+    default:
+      return new THREE.Color(0x06B6D4); // Cyan
+  }
+};
+
+interface ParticleSphereProps {
+  status: AiStatus;
+}
+
+const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
   const groupRef = useRef<THREE.Group>(null);
+  const materialRef = useRef<THREE.PointsMaterial>(null);
+  const linesMaterialRef = useRef<THREE.LineBasicMaterial>(null);
   
   const count = 150; // number of nodes
   const maxDistance = 0.8; // line connection distance
@@ -33,7 +55,7 @@ const ParticleSphere = () => {
     // Generate lines
     const linePos = [];
     const lineCol = [];
-    const color = new THREE.Color(0x06B6D4); // Cyan
+    const baseColor = new THREE.Color(0xffffff);
 
     for (let i = 0; i < count; i++) {
       for (let j = i + 1; j < count; j++) {
@@ -44,10 +66,9 @@ const ParticleSphere = () => {
             posVectors[j].x, posVectors[j].y, posVectors[j].z
           );
           
-          // Fade alpha based on distance
           const alpha = 1.0 - (dist / maxDistance);
-          lineCol.push(color.r, color.g, color.b, alpha);
-          lineCol.push(color.r, color.g, color.b, alpha);
+          lineCol.push(baseColor.r, baseColor.g, baseColor.b, alpha);
+          lineCol.push(baseColor.r, baseColor.g, baseColor.b, alpha);
         }
       }
     }
@@ -59,20 +80,48 @@ const ParticleSphere = () => {
     };
   }, []);
 
+  const targetColor = useMemo(() => getColorsForStatus(status), [status]);
+
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
-      groupRef.current.rotation.x = state.clock.elapsedTime * 0.05;
+      // Base rotation
+      let rotSpeedY = 0.1;
+      let rotSpeedX = 0.05;
+      let pulseIntensity = 0.02;
+      let pulseSpeed = 2;
+
+      // Dynamic behavior based on status
+      if (status === 'listening') {
+        pulseIntensity = 0.05;
+        pulseSpeed = 4;
+      } else if (status === 'thinking') {
+        rotSpeedY = 0.8;
+        rotSpeedX = 0.4;
+        pulseIntensity = 0.01;
+      } else if (status === 'speaking') {
+        pulseIntensity = 0.08;
+        pulseSpeed = 8;
+        rotSpeedY = 0.2;
+      }
+
+      groupRef.current.rotation.y += state.clock.getDelta() * rotSpeedY;
+      groupRef.current.rotation.x += state.clock.getDelta() * rotSpeedX;
       
-      // Gentle pulsing effect
-      const scale = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.02;
+      const scale = 1 + Math.sin(state.clock.elapsedTime * pulseSpeed) * pulseIntensity;
       groupRef.current.scale.set(scale, scale, scale);
+
+      // Smooth color transition
+      if (materialRef.current) {
+        materialRef.current.color.lerp(targetColor, 0.05);
+      }
+      if (linesMaterialRef.current) {
+         linesMaterialRef.current.color.lerp(targetColor, 0.05);
+      }
     }
   });
 
   return (
     <group ref={groupRef}>
-      {/* Points */}
       <points>
         <bufferGeometry>
           <bufferAttribute
@@ -83,10 +132,9 @@ const ParticleSphere = () => {
             args={[positions, 3]}
           />
         </bufferGeometry>
-        <pointsMaterial size={0.06} color="#06B6D4" transparent opacity={0.8} />
+        <pointsMaterial ref={materialRef} size={0.06} color="#06B6D4" transparent opacity={0.8} />
       </points>
 
-      {/* Connecting Lines */}
       <lineSegments>
         <bufferGeometry>
           <bufferAttribute
@@ -104,25 +152,27 @@ const ParticleSphere = () => {
             args={[lineColors, 4]}
           />
         </bufferGeometry>
-        <lineBasicMaterial vertexColors transparent depthWrite={false} blending={THREE.AdditiveBlending} />
+        <lineBasicMaterial ref={linesMaterialRef} vertexColors transparent depthWrite={false} blending={THREE.AdditiveBlending} />
       </lineSegments>
 
-      {/* Inner Energy Core */}
       <Sphere args={[1.5, 32, 32]}>
-        <meshBasicMaterial color="#06B6D4" transparent opacity={0.05} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <meshBasicMaterial color="#000000" transparent opacity={0.8} depthWrite={false} />
       </Sphere>
     </group>
   );
 };
 
-const AiCore3D: React.FC = () => {
+interface AiCore3DProps {
+  status?: AiStatus;
+}
+
+const AiCore3D: React.FC<AiCore3DProps> = ({ status = 'idle' }) => {
   return (
     <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }}>
       <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
         <ambientLight intensity={0.5} />
-        <ParticleSphere />
-        {/* Adds interactive rotation when dragged */}
-        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
+        <ParticleSphere status={status} />
+        <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={status === 'thinking' ? 2.0 : 0.5} />
       </Canvas>
     </div>
   );
