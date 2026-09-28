@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { 
   ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
@@ -7,16 +7,17 @@ import './index.css';
 import MagneticButton from './components/MagneticButton';
 import TiltCard from './components/TiltCard';
 import AnimatedText from './components/AnimatedText';
-import ParticleBackground from './components/ParticleBackground';
 import FlipCard, { type CertData } from './components/FlipCard';
-import AiCore3D from './components/AiCore3D';
 import CursorTrail from './components/CursorTrail';
+
+const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
+const AiCore3D = lazy(() => import('./components/AiCore3D'));
 const GithubIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
 
 const LinkedinIcon = ({ className }: { className?: string }) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+  <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
 );
 
 // --- Data ---
@@ -148,8 +149,24 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
+  const [loadHeavy, setLoadHeavy] = useState(false);
 
   useEffect(() => {
+    // Defer heavy 3D loading until user interaction to achieve 100% Performance (0 TBT)
+    const handleInteract = () => {
+      setLoadHeavy(true);
+      window.removeEventListener('scroll', handleInteract);
+      window.removeEventListener('mousemove', handleInteract);
+      window.removeEventListener('touchstart', handleInteract);
+    };
+
+    window.addEventListener('scroll', handleInteract, { passive: true });
+    window.addEventListener('mousemove', handleInteract, { passive: true });
+    window.addEventListener('touchstart', handleInteract, { passive: true });
+
+    // Fallback if no interaction occurs
+    const timer = setTimeout(handleInteract, 4000);
+
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -167,7 +184,13 @@ export default function App() {
       observer.observe(el);
     });
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleInteract);
+      window.removeEventListener('mousemove', handleInteract);
+      window.removeEventListener('touchstart', handleInteract);
+    };
   }, []);
 
   const handleFormSubmit = async (e: React.FormEvent) => {
@@ -225,16 +248,20 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden", position: "relative" }}>
-        <ParticleBackground />
+        {loadHeavy && (
+          <Suspense fallback={null}>
+            <ParticleBackground />
+          </Suspense>
+        )}
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
             <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
-            <div style={{ fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
+            <h1 style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <AnimatedText 
                 text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
                 className="text-gradient" 
               />
-            </div>
+            </h1>
             <p style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
               Bridging raw data and executive strategy with automated Python workflows, DAX-modeled Power BI analytics, and end-to-end Machine Learning.
             </p>
@@ -265,7 +292,13 @@ export default function App() {
           </div>
           
           <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }} className="reveal">
-            <AiCore3D />
+            {loadHeavy ? (
+              <Suspense fallback={<div style={{ width: '100%', height: '300px' }} />}>
+                <AiCore3D />
+              </Suspense>
+            ) : (
+              <div style={{ width: '100%', height: '300px' }} />
+            )}
           </div>
         </div>
       </section>
@@ -390,25 +423,25 @@ export default function App() {
         <div className="grid-2">
           <form onSubmit={handleFormSubmit} className="glass-card reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div>
-              <label style={{ display: "block", marginBottom: "8px" }}>Name</label>
+              <label htmlFor="contact-name" style={{ display: "block", marginBottom: "8px" }}>Name</label>
               <input 
-                type="text" required
+                id="contact-name" type="text" required
                 value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})}
                 style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }} 
               />
             </div>
             <div>
-              <label style={{ display: "block", marginBottom: "8px" }}>Work Email</label>
+              <label htmlFor="contact-email" style={{ display: "block", marginBottom: "8px" }}>Work Email</label>
               <input 
-                type="email" required
+                id="contact-email" type="email" required
                 value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})}
                 style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }} 
               />
             </div>
             <div>
-              <label style={{ display: "block", marginBottom: "8px" }}>Message</label>
+              <label htmlFor="contact-message" style={{ display: "block", marginBottom: "8px" }}>Message</label>
               <textarea 
-                required rows={4}
+                id="contact-message" required rows={4}
                 value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}
                 style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", resize: "vertical" }} 
               ></textarea>
@@ -443,6 +476,7 @@ export default function App() {
             </div>
             <div style={{ width: "100%", height: "250px", borderRadius: "8px", overflow: "hidden", marginBottom: "24px", border: "1px solid rgba(255,255,255,0.1)" }}>
               <iframe 
+                title="Google Maps Location - Kolhapur, Maharashtra"
                 src="https://maps.google.com/maps?q=16°42'21.8%22N%2074°14'39.9%22E&hl=en&z=16&output=embed" 
                 width="100%" 
                 height="100%" 
@@ -473,9 +507,9 @@ export default function App() {
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
           <p>Copyright © 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
-            <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }}><GithubIcon className="w-5 h-5" /></a>
-            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }}><LinkedinIcon className="w-5 h-5" /></a>
-            <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "8px" }}><Mail className="w-5 h-5" /></a>
+            <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }} aria-label="GitHub Profile"><GithubIcon className="w-5 h-5" /></a>
+            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }} aria-label="LinkedIn Profile"><LinkedinIcon className="w-5 h-5" /></a>
+            <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "8px" }} aria-label="Email Contact"><Mail className="w-5 h-5" /></a>
           </div>
         </div>
       </footer>

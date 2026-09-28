@@ -188,13 +188,13 @@ a {
 
 /* Badge */
 .badge {
-  background: rgba(57, 255, 20, 0.1);
-  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.15);
+  color: #7dd3fc;
   padding: 6px 16px;
   border-radius: 20px;
   font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid rgba(57, 255, 20, 0.2);
+  font-weight: 600;
+  border: 1px solid rgba(56, 189, 248, 0.3);
   display: inline-block;
   margin: 4px;
 }
