@@ -6,10 +6,9 @@ import {
 import './index.css';
 import MagneticButton from './components/MagneticButton';
 import TiltCard from './components/TiltCard';
-import AnimatedText from './components/AnimatedText';
 import FlipCard, { type CertData } from './components/FlipCard';
-import CursorTrail from './components/CursorTrail';
 
+const CursorTrail = lazy(() => import('./components/CursorTrail'));
 const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
 const AiCore3D = lazy(() => import('./components/AiCore3D'));
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -226,7 +225,11 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <CursorTrail />
+      {loadHeavy && (
+        <Suspense fallback={null}>
+          <CursorTrail />
+        </Suspense>
+      )}
       {/* Navigation */}
       <nav>
         <div className="container nav-content">
@@ -256,11 +259,10 @@ export default function App() {
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
             <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
-            <h1 style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
-              <AnimatedText 
-                text="Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models." 
-                className="text-gradient" 
-              />
+            <h1 className="hero-title-anim" style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
+              <span className="text-gradient">
+                Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
+              </span>
             </h1>
             <p style={{ fontSize: "1.2rem", color: "var(--text-secondary)", marginBottom: "40px" }}>
               Bridging raw data and executive strategy with automated Python workflows, DAX-modeled Power BI analytics, and end-to-end Machine Learning.
