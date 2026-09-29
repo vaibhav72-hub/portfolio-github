@@ -230,9 +230,9 @@ export default function FlipCard({ cert, className = "" }: FlipCardProps) {
                   onClick={(e) => e.stopPropagation()}
                   style={{
                     pointerEvents: "auto",
-                    fontSize: "0.72rem",
-                    padding: "4px 10px",
-                    borderRadius: "6px",
+                    fontSize: "0.75rem",
+                    padding: "12px 16px",
+                    borderRadius: "8px",
                     background: "rgba(15, 23, 42, 0.9)",
                     backdropFilter: "blur(8px)",
                     color: "#38BDF8",
