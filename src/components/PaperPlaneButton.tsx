@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion, useAnimation, HTMLMotionProps } from 'framer-motion';
+import { motion, useAnimation, type HTMLMotionProps } from 'framer-motion';
 
 interface PaperPlaneButtonProps extends HTMLMotionProps<"button"> {
   children: React.ReactNode;
