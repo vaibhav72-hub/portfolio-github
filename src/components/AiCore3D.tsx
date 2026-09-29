@@ -1,4 +1,4 @@
-import React, { useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
@@ -163,6 +163,16 @@ interface AiCore3DProps {
 }
 
 const AiCore3D: React.FC<AiCore3DProps> = ({ status = 'idle' }) => {
+  useEffect(() => {
+    // Force a resize event after a tiny delay.
+    // Sometimes mobile browsers or flex layouts prevent the canvas from getting 
+    // proper dimensions until a resize (or scroll) event happens.
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }}>
       <Canvas dpr={1} camera={{ position: [0, 0, 5], fov: 60 }}>
