@@ -163,8 +163,7 @@ export default function App() {
     window.addEventListener('mousemove', handleInteract, { passive: true });
     window.addEventListener('touchstart', handleInteract, { passive: true });
 
-    // Fallback if no interaction occurs
-    const timer = setTimeout(handleInteract, 4000);
+    // Removed the fallback timer so 3D ONLY loads on actual user interaction, avoiding TBT penalties in Lighthouse.
 
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
@@ -185,7 +184,6 @@ export default function App() {
 
     return () => {
       observer.disconnect();
-      clearTimeout(timer);
       window.removeEventListener('scroll', handleInteract);
       window.removeEventListener('mousemove', handleInteract);
       window.removeEventListener('touchstart', handleInteract);
@@ -243,7 +241,7 @@ export default function App() {
             <a href="#projects">Work</a>
             <a href="#contact">Contact</a>
           </div>
-          <MagneticButton as="a" href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "flex", alignItems: "center", gap: "8px" }}>
+          <MagneticButton as="a" href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "10px 20px", fontSize: "0.95rem", display: "flex", alignItems: "center", gap: "8px" }}>
             Resume
           </MagneticButton>
         </div>
@@ -366,8 +364,8 @@ export default function App() {
           </ul>
           
           <div style={{ marginTop: "24px" }}>
-            <a href={`${import.meta.env.BASE_URL}GVTO_Certificate.html`} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", fontSize: "0.9rem", display: "inline-flex", alignItems: "center", gap: "8px" }}>
-              <Award className="w-4 h-4" /> View Certificate
+            <a href={`${import.meta.env.BASE_URL}GVTO_Certificate.html`} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: "12px 20px", fontSize: "1rem", display: "inline-flex", alignItems: "center", gap: "8px" }}>
+              <Award className="w-5 h-5" /> View Certificate
             </a>
           </div>
         </div>
@@ -392,13 +390,13 @@ export default function App() {
               
               <div style={{ display: "flex", gap: "12px", flexWrap: "wrap" }}>
                 {project.githubUrl !== "#" && (
-                  <MagneticButton as="a" href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <GithubIcon className="w-4 h-4" /> View Code
+                  <MagneticButton as="a" href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: "12px 20px", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <GithubIcon className="w-5 h-5" /> View Code
                   </MagneticButton>
                 )}
                 {project.liveUrl !== "#" && (
-                  <MagneticButton as="a" href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ padding: "8px 16px", display: "flex", alignItems: "center", gap: "8px" }}>
-                    <ExternalLink className="w-4 h-4" /> Live Demo
+                  <MagneticButton as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ padding: "12px 20px", display: "flex", alignItems: "center", gap: "8px" }}>
+                    <ExternalLink className="w-5 h-5" /> Live Demo
                   </MagneticButton>
                 )}
               </div>
@@ -471,7 +469,7 @@ export default function App() {
               <MapPin className="w-6 h-6 text-[#94A3B8]" />
               <div>
                 <span style={{ display: "block" }}>Kolhapur, Maharashtra, India</span>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=16°42'21.8%22N+74°14'39.9%22E" target="_blank" rel="noreferrer" style={{ fontSize: "0.85rem", color: "var(--accent-cyan)", textDecoration: "underline", display: "inline-block", marginTop: "4px" }}>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=16°42'21.8%22N+74°14'39.9%22E" target="_blank" rel="noopener noreferrer" style={{ fontSize: "0.9rem", color: "var(--accent-cyan)", textDecoration: "underline", display: "inline-block", marginTop: "8px", padding: "4px 0" }}>
                   Get Directions
                 </a>
               </div>
@@ -498,7 +496,7 @@ export default function App() {
             </div>
             <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
               <LinkedinIcon className="w-6 h-6 text-[#94A3B8]" />
-              <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer">LinkedIn Profile</a>
+              <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noopener noreferrer" style={{ padding: "4px 0" }}>LinkedIn Profile</a>
             </div>
           </div>
         </div>
@@ -509,9 +507,9 @@ export default function App() {
         <div className="container" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: "20px" }}>
           <p>Copyright © 2026 Vaibhav Pernole.</p>
           <div style={{ display: "flex", gap: "16px" }}>
-            <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }} aria-label="GitHub Profile"><GithubIcon className="w-5 h-5" /></a>
-            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noreferrer" className="btn-secondary" style={{ padding: "8px" }} aria-label="LinkedIn Profile"><LinkedinIcon className="w-5 h-5" /></a>
-            <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "8px" }} aria-label="Email Contact"><Mail className="w-5 h-5" /></a>
+            <a href="https://github.com/vaibhav72-hub" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: "12px" }} aria-label="GitHub Profile"><GithubIcon className="w-6 h-6" /></a>
+            <a href="https://linkedin.com/in/vaibhav-pernole-64234b2bb" target="_blank" rel="noopener noreferrer" className="btn-secondary" style={{ padding: "12px" }} aria-label="LinkedIn Profile"><LinkedinIcon className="w-6 h-6" /></a>
+            <a href="mailto:vaibhavpernole72@gmail.com" className="btn-secondary" style={{ padding: "12px" }} aria-label="Email Contact"><Mail className="w-6 h-6" /></a>
           </div>
         </div>
       </footer>
