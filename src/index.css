@@ -338,3 +338,44 @@ nav {
     gap: 12px;
   }
 }
+
+/* Fancy Form Inputs */
+.fancy-input {
+  width: 100%;
+  padding: 16px;
+  border-radius: 12px;
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.fancy-input:focus, .fancy-input:not(:placeholder-shown) {
+  border-color: rgba(56, 189, 248, 0.5);
+  background: rgba(30, 41, 59, 0.6);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+}
+
+.fancy-label {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 1rem;
+}
+
+.fancy-input:focus ~ .fancy-label,
+.fancy-input:not(:placeholder-shown) ~ .fancy-label {
+  top: -10px;
+  left: 12px;
+  font-size: 0.85rem;
+  color: var(--accent-cyan);
+  background: var(--bg-primary);
+  padding: 0 4px;
+  border-radius: 4px;
+}

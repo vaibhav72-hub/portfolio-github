@@ -388,40 +388,45 @@ export default function App() {
         <h2 className="section-title reveal">Get In <span>Touch</span></h2>
         <div className="grid-2">
           <form onSubmit={handleFormSubmit} className="glass-card reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <div>
-              <label htmlFor="contact-name" style={{ display: "block", marginBottom: "8px" }}>Name</label>
+            <div style={{ position: 'relative', marginTop: '10px' }}>
               <input 
                 id="contact-name" type="text" required
                 value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }} 
+                className="fancy-input"
+                placeholder=" "
               />
+              <label htmlFor="contact-name" className="fancy-label">Name</label>
             </div>
-            <div>
-              <label htmlFor="contact-email" style={{ display: "block", marginBottom: "8px" }}>Work Email</label>
+            <div style={{ position: 'relative', marginTop: '10px' }}>
               <input 
                 id="contact-email" type="email" required
                 value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff" }} 
+                className="fancy-input"
+                placeholder=" "
               />
+              <label htmlFor="contact-email" className="fancy-label">Work Email</label>
             </div>
-            <div>
-              <label htmlFor="contact-message" style={{ display: "block", marginBottom: "8px" }}>Message</label>
+            <div style={{ position: 'relative', marginTop: '10px' }}>
               <textarea 
                 id="contact-message" required rows={4}
                 value={formState.message} onChange={e => setFormState({...formState, message: e.target.value})}
-                style={{ width: "100%", padding: "12px", borderRadius: "8px", background: "var(--bg-tertiary)", border: "1px solid rgba(255,255,255,0.1)", color: "#fff", resize: "vertical" }} 
+                className="fancy-input"
+                placeholder=" "
+                style={{ resize: "vertical" }}
               ></textarea>
+              <label htmlFor="contact-message" className="fancy-label">Message</label>
             </div>
-            <button 
+            <MagneticButton 
+              as="button"
               type="submit" 
               className="btn-primary" 
-              style={{ marginTop: "8px", opacity: status === 'Sending...' ? 0.7 : 1 }}
+              style={{ marginTop: "16px", padding: "16px", width: "100%", opacity: status === 'Sending...' ? 0.7 : 1 }}
               disabled={status === 'Sending...'}
             >
               {status === 'Sending...' ? 'Sending...' : 'Send Message'}
-            </button>
+            </MagneticButton>
             {status && status !== 'Sending...' && (
-              <p style={{ marginTop: "8px", fontSize: "0.9rem", color: status.includes('successfully') ? "var(--accent-emerald)" : "#ef4444" }}>
+              <p style={{ marginTop: "8px", fontSize: "0.9rem", color: status.includes('successfully') ? "var(--accent-emerald)" : "#ef4444", textAlign: "center" }}>
                 {status}
               </p>
             )}
