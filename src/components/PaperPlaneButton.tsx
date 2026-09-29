@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { motion, useAnimation, HTMLMotionProps } from 'framer-motion';
 
-interface PaperPlaneButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface PaperPlaneButtonProps extends HTMLMotionProps<"button"> {
   children: React.ReactNode;
   isSending: boolean;
   isSuccess: boolean;

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import { motion, useSpring, useTransform } from 'framer-motion';
+import { motion, useSpring } from 'framer-motion';
 
 interface ElasticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
@@ -70,11 +70,6 @@ export default function ElasticSubmitButton({ children, ...props }: ElasticButto
       // The socket center is (0,0) in our relative coordinates (since SVG is centered)
       const bx = springX.get();
       const by = springY.get();
-      
-      // Control point for quadratic bezier curve (make it look like a tense band)
-      // We push the control point slightly in the opposite direction or midway
-      const cx = bx * 0.5;
-      const cy = by * 0.5;
 
       // Calculate the thickness of the band based on stretch distance
       const stretch = Math.sqrt(bx * bx + by * by);
