@@ -28,8 +28,8 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
   const materialRef = useRef<THREE.PointsMaterial>(null);
   const linesMaterialRef = useRef<THREE.LineBasicMaterial>(null);
   
-  const count = 100; // number of nodes
-  const maxDistance = 0.75; // line connection distance
+  const count = 50; // reduced number of nodes for better performance
+  const maxDistance = 0.6; // reduced line connection distance
 
   const { positions, linePositions, lineColors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -165,7 +165,7 @@ interface AiCore3DProps {
 const AiCore3D: React.FC<AiCore3DProps> = ({ status = 'idle' }) => {
   return (
     <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }}>
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 60 }}>
+      <Canvas dpr={1} camera={{ position: [0, 0, 5], fov: 60 }}>
         <ambientLight intensity={0.5} />
         <ParticleSphere status={status} />
         <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={status === 'thinking' ? 2.0 : 0.5} />

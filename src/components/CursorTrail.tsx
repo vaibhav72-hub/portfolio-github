@@ -6,8 +6,13 @@ const CursorTrail: React.FC = () => {
 
   useEffect(() => {
     let idCounter = 0;
+    let lastTime = 0;
     
     const handleMouseMove = (e: MouseEvent) => {
+      const now = Date.now();
+      if (now - lastTime < 30) return; // Throttle to roughly 30fps
+      lastTime = now;
+
       const newPoint = { x: e.clientX, y: e.clientY, id: idCounter++ };
       
       setTrail((prev) => {

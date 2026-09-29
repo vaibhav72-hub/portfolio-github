@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Code, Database, LineChart, Cpu, Terminal
@@ -8,9 +8,10 @@ import MagneticButton from './components/MagneticButton';
 import TiltCard from './components/TiltCard';
 import FlipCard, { type CertData } from './components/FlipCard';
 
-const CursorTrail = lazy(() => import('./components/CursorTrail'));
-const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
-const AiCore3D = lazy(() => import('./components/AiCore3D'));
+import CursorTrail from './components/CursorTrail';
+import ParticleBackground from './components/ParticleBackground';
+import AiCore3D from './components/AiCore3D';
+
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
 );
@@ -148,23 +149,8 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
-  const [loadHeavy, setLoadHeavy] = useState(false);
 
   useEffect(() => {
-    // Defer heavy 3D loading until user interaction to achieve 100% Performance (0 TBT)
-    const handleInteract = () => {
-      setLoadHeavy(true);
-      window.removeEventListener('scroll', handleInteract);
-      window.removeEventListener('mousemove', handleInteract);
-      window.removeEventListener('touchstart', handleInteract);
-    };
-
-    window.addEventListener('scroll', handleInteract, { passive: true });
-    window.addEventListener('mousemove', handleInteract, { passive: true });
-    window.addEventListener('touchstart', handleInteract, { passive: true });
-
-    // Removed the fallback timer so 3D ONLY loads on actual user interaction, avoiding TBT penalties in Lighthouse.
-
     const observer = new IntersectionObserver((entries, obs) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -184,9 +170,6 @@ export default function App() {
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleInteract);
-      window.removeEventListener('mousemove', handleInteract);
-      window.removeEventListener('touchstart', handleInteract);
     };
   }, []);
 
@@ -223,11 +206,7 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {loadHeavy && (
-        <Suspense fallback={null}>
-          <CursorTrail />
-        </Suspense>
-      )}
+      <CursorTrail />
       {/* Navigation */}
       <nav>
         <div className="container nav-content">
@@ -249,11 +228,7 @@ export default function App() {
 
       {/* Hero Section */}
       <section className="section hero-gradient" style={{ minHeight: "100vh", display: "flex", alignItems: "center", paddingTop: "80px", overflow: "hidden", position: "relative" }}>
-        {loadHeavy && (
-          <Suspense fallback={null}>
-            <ParticleBackground />
-          </Suspense>
-        )}
+        <ParticleBackground />
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
             <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & AI & ML Developer</div>
@@ -291,14 +266,8 @@ export default function App() {
             </div>
           </div>
           
-          <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }} className="reveal">
-            {loadHeavy ? (
-              <Suspense fallback={<div style={{ width: '100%', height: '300px' }} />}>
-                <AiCore3D />
-              </Suspense>
-            ) : (
-              <div style={{ width: '100%', height: '300px' }} />
-            )}
+          <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }}>
+            <AiCore3D />
           </div>
         </div>
       </section>
