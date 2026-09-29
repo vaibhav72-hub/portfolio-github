@@ -256,7 +256,7 @@ export default function App() {
         )}
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
-            <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & BI Developer</div>
+            <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & AI & ML Developer</div>
             <h1 className="hero-title-anim" style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <span className="text-gradient">
                 Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
