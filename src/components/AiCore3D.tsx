@@ -28,8 +28,8 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
   const materialRef = useRef<THREE.PointsMaterial>(null);
   const linesMaterialRef = useRef<THREE.LineBasicMaterial>(null);
   
-  const count = 150; // number of nodes
-  const maxDistance = 0.8; // line connection distance
+  const count = 100; // number of nodes
+  const maxDistance = 0.75; // line connection distance
 
   const { positions, linePositions, lineColors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
@@ -82,7 +82,7 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
 
   const targetColor = useMemo(() => getColorsForStatus(status), [status]);
 
-  useFrame((state) => {
+  useFrame((state, delta) => {
     if (groupRef.current) {
       // Base rotation
       let rotSpeedY = 0.1;
@@ -104,8 +104,8 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
         rotSpeedY = 0.2;
       }
 
-      groupRef.current.rotation.y += state.clock.getDelta() * rotSpeedY;
-      groupRef.current.rotation.x += state.clock.getDelta() * rotSpeedX;
+      groupRef.current.rotation.y += delta * rotSpeedY;
+      groupRef.current.rotation.x += delta * rotSpeedX;
       
       const scale = 1 + Math.sin(state.clock.elapsedTime * pulseSpeed) * pulseIntensity;
       groupRef.current.scale.set(scale, scale, scale);
@@ -165,7 +165,7 @@ interface AiCore3DProps {
 const AiCore3D: React.FC<AiCore3DProps> = ({ status = 'idle' }) => {
   return (
     <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }}>
-      <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 60 }}>
         <ambientLight intensity={0.5} />
         <ParticleSphere status={status} />
         <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={status === 'thinking' ? 2.0 : 0.5} />
