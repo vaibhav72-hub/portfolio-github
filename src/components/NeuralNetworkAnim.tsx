@@ -55,7 +55,6 @@ const NeuralNetworkAnim: React.FC = () => {
                   delay: Math.random() * 3,
                   ease: "linear"
                 }}
-                style={{ filter: 'drop-shadow(0 0 2px #00F0FF)' }}
               />
             </g>
           );

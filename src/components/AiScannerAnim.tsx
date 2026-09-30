@@ -41,7 +41,6 @@ const AiScannerAnim: React.FC = () => {
             repeat: Infinity,
             ease: "linear"
           }}
-          style={{ filter: 'drop-shadow(0 0 4px #00F0FF)' }}
         />
         
         {/* Highlighted scanned data */}
@@ -62,7 +61,6 @@ const AiScannerAnim: React.FC = () => {
               delay: (point.y / 100) * 2, // Synchronize roughly with scanner going down
               ease: "linear"
             }}
-            style={{ filter: 'drop-shadow(0 0 2px #8A2BE2)' }}
           />
         ))}
       </svg>

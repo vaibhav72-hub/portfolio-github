@@ -44,7 +44,6 @@ const DataPipelineAnim: React.FC = () => {
                 ease: "linear",
                 delay: path.delay
               }}
-              style={{ filter: 'drop-shadow(0 0 3px #00F0FF)' }}
             />
           </g>
         ))}
@@ -69,7 +68,6 @@ const DataPipelineAnim: React.FC = () => {
               delay: Math.random() * 2,
               ease: "easeInOut"
             }}
-            style={{ filter: `drop-shadow(0 0 4px ${node.id === 3 ? '#8A2BE2' : '#00F0FF'})` }}
           />
         ))}
 

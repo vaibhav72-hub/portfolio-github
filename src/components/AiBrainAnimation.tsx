@@ -158,7 +158,6 @@ const AiBrainAnimation: React.FC = () => {
                  ease: "easeInOut",
                  delay: Math.random() * 3
                }}
-               style={{ filter: 'drop-shadow(0 0 4px #fff)' }}
              />
            )
         })}

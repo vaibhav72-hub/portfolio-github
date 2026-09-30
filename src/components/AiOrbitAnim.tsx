@@ -17,7 +17,7 @@ const AiOrbitAnim: React.FC = () => {
           cx="140" cy="100" r="3" fill="#00F0FF"
           animate={{ rotate: 360 }}
           transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: '100px 100px', filter: 'drop-shadow(0 0 2px #00F0FF)' }}
+          style={{ transformOrigin: '100px 100px' }}
         />
 
         {/* Middle Orbit */}
@@ -32,7 +32,7 @@ const AiOrbitAnim: React.FC = () => {
           cx="35" cy="100" r="4" fill="#8A2BE2"
           animate={{ rotate: -360 }}
           transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
-          style={{ transformOrigin: '100px 100px', filter: 'drop-shadow(0 0 3px #8A2BE2)' }}
+          style={{ transformOrigin: '100px 100px' }}
         />
         
         {/* Outer Orbit */}
@@ -56,7 +56,6 @@ const AiOrbitAnim: React.FC = () => {
           fill="#00F0FF"
           animate={{ scale: [1, 1.2, 1], opacity: [0.8, 1, 0.8] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-          style={{ filter: 'drop-shadow(0 0 5px #00F0FF)' }}
         />
       </svg>
     </div>

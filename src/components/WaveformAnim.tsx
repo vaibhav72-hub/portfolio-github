@@ -26,7 +26,6 @@ const WaveformAnim: React.FC = () => {
               ease: "easeInOut",
               delay: i * 0.05
             }}
-            style={{ filter: `drop-shadow(0 0 3px ${i % 3 === 0 ? '#8A2BE2' : '#00F0FF'})` }}
           />
         ))}
       </svg>
