@@ -45,7 +45,7 @@ const AiScannerAnim: React.FC = () => {
         />
         
         {/* Highlighted scanned data */}
-        {grid.map((point, index) => (
+        {grid.map((point) => (
           <motion.circle
             key={`highlight-${point.id}`}
             cx={point.x}
