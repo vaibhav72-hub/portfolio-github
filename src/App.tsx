@@ -10,11 +10,11 @@ import FlipCard, { type CertData } from './components/FlipCard';
 
 import CursorTrail from './components/CursorTrail';
 import AnimatedNav from './components/AnimatedNav';
-import NeuralNetworkAnim from './components/NeuralNetworkAnim';
-import AiScannerAnim from './components/AiScannerAnim';
-import AiOrbitAnim from './components/AiOrbitAnim';
-import WaveformAnim from './components/WaveformAnim';
-import DataPipelineAnim from './components/DataPipelineAnim';
+const NeuralNetworkAnim = lazy(() => import('./components/NeuralNetworkAnim'));
+const AiScannerAnim = lazy(() => import('./components/AiScannerAnim'));
+const AiOrbitAnim = lazy(() => import('./components/AiOrbitAnim'));
+const WaveformAnim = lazy(() => import('./components/WaveformAnim'));
+const DataPipelineAnim = lazy(() => import('./components/DataPipelineAnim'));
 
 const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
 const AiCore3D = lazy(() => import('./components/AiCore3D'));
@@ -350,8 +350,8 @@ export default function App() {
       {/* Skills Matrix */}
       <SectionWrapper id="skills" className="overflow-hidden">
         {/* Decorative ML Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <NeuralNetworkAnim />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <Suspense fallback={null}><NeuralNetworkAnim /></Suspense>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Technical <span>Skills Matrix</span></h2>
         <div className="grid-3" style={{ position: 'relative', zIndex: 1 }}>
@@ -372,8 +372,8 @@ export default function App() {
       {/* Experience Section */}
       <SectionWrapper id="experience" className="overflow-hidden">
         {/* Decorative Data Pipeline Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.2, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <DataPipelineAnim />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.2, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <Suspense fallback={null}><DataPipelineAnim /></Suspense>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Work <span>Experience</span></h2>
         <div className="glass-card reveal" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px", zIndex: 1 }}>
@@ -401,8 +401,8 @@ export default function App() {
       {/* Projects Section */}
       <SectionWrapper id="projects" className="overflow-hidden">
         {/* Decorative AI Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <AiScannerAnim />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <Suspense fallback={null}><AiScannerAnim /></Suspense>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Featured <span>Work</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
@@ -439,8 +439,8 @@ export default function App() {
       {/* Certifications Section */}
       <SectionWrapper id="credentials" className="overflow-hidden">
         {/* Decorative AI Orbit Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <AiOrbitAnim />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <Suspense fallback={null}><AiOrbitAnim /></Suspense>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Credentials <span>& Certifications</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
@@ -455,8 +455,8 @@ export default function App() {
       {/* Contact Section */}
       <SectionWrapper id="contact" className="overflow-hidden">
         {/* Decorative Audio/Waveform Background */}
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-           <WaveformAnim />
+        <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+           <Suspense fallback={null}><WaveformAnim /></Suspense>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Get In <span>Touch</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
