@@ -10,7 +10,11 @@ import FlipCard, { type CertData } from './components/FlipCard';
 
 import CursorTrail from './components/CursorTrail';
 import AnimatedNav from './components/AnimatedNav';
-import PaperPlaneButton from './components/PaperPlaneButton';
+import NeuralNetworkAnim from './components/NeuralNetworkAnim';
+import AiScannerAnim from './components/AiScannerAnim';
+import AiOrbitAnim from './components/AiOrbitAnim';
+import WaveformAnim from './components/WaveformAnim';
+import DataPipelineAnim from './components/DataPipelineAnim';
 
 const ParticleBackground = lazy(() => import('./components/ParticleBackground'));
 const AiCore3D = lazy(() => import('./components/AiCore3D'));
@@ -142,7 +146,7 @@ const CERTS: CertData[] = [
 
 // --- Components ---
 const SectionWrapper = ({ children, id, className = "" }: { children: React.ReactNode, id: string, className?: string }) => (
-  <section id={id} className={`section ${className}`}>
+  <section id={id} className={`section ${className}`} style={{ position: 'relative' }}>
     <div className="container">
       {children}
     </div>
@@ -232,7 +236,7 @@ export default function App() {
         </Suspense>
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
-            <div className="badge" style={{ marginBottom: "24px" }}>B.Tech AI & ML | Data Analyst & AI & ML Developer</div>
+            <div className="badge" style={{ marginBottom: "24px", marginTop: "60px" }}>B.Tech AI & ML | Data Analyst & AI & ML Developer</div>
             <h1 className="hero-title-anim" style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <span className="text-gradient">
                 Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
@@ -301,9 +305,13 @@ export default function App() {
       </SectionWrapper>
 
       {/* Skills Matrix */}
-      <SectionWrapper id="skills">
-        <h2 className="section-title reveal">Technical <span>Skills Matrix</span></h2>
-        <div className="grid-3">
+      <SectionWrapper id="skills" className="overflow-hidden">
+        {/* Decorative ML Background */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <NeuralNetworkAnim />
+        </div>
+        <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Technical <span>Skills Matrix</span></h2>
+        <div className="grid-3" style={{ position: 'relative', zIndex: 1 }}>
           {SKILLS.map((skill, idx) => (
             <TiltCard key={idx} className="glass-card reveal">
               {skill.icon}
@@ -319,9 +327,13 @@ export default function App() {
       </SectionWrapper>
 
       {/* Experience Section */}
-      <SectionWrapper id="experience">
-        <h2 className="section-title reveal">Work <span>Experience</span></h2>
-        <div className="glass-card reveal" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px" }}>
+      <SectionWrapper id="experience" className="overflow-hidden">
+        {/* Decorative Data Pipeline Background */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.2, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <DataPipelineAnim />
+        </div>
+        <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Work <span>Experience</span></h2>
+        <div className="glass-card reveal" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px", zIndex: 1 }}>
           <div style={{ position: "absolute", left: "24px", top: "32px", bottom: "32px", width: "2px", background: "var(--accent-cyan)" }}></div>
           <div style={{ position: "absolute", left: "19px", top: "32px", width: "12px", height: "12px", borderRadius: "50%", background: "var(--accent-cyan)", boxShadow: "0 0 10px var(--accent-cyan)" }}></div>
           
@@ -344,9 +356,13 @@ export default function App() {
       </SectionWrapper>
 
       {/* Projects Section */}
-      <SectionWrapper id="projects">
-        <h2 className="section-title reveal">Featured <span>Work</span></h2>
-        <div className="grid-2">
+      <SectionWrapper id="projects" className="overflow-hidden">
+        {/* Decorative AI Background */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <AiScannerAnim />
+        </div>
+        <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Featured <span>Work</span></h2>
+        <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
           {PROJECTS.map((project, idx) => (
             <TiltCard key={idx} className="glass-card reveal" style={{ borderTop: "4px solid var(--accent-cyan)", height: "100%" }}>
               <h3 style={{ fontSize: "1.3rem", color: "var(--text-primary)", marginBottom: "8px" }}>{project.title}</h3>
@@ -378,9 +394,13 @@ export default function App() {
       </SectionWrapper>
 
       {/* Certifications Section */}
-      <SectionWrapper id="credentials">
-        <h2 className="section-title reveal">Credentials <span>& Certifications</span></h2>
-        <div className="grid-2">
+      <SectionWrapper id="credentials" className="overflow-hidden">
+        {/* Decorative AI Orbit Background */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+           <AiOrbitAnim />
+        </div>
+        <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Credentials <span>& Certifications</span></h2>
+        <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
           {CERTS.map((cert, idx) => (
             <div key={idx} className="reveal" style={{ height: "100%" }}>
               <FlipCard cert={cert} />
@@ -390,9 +410,13 @@ export default function App() {
       </SectionWrapper>
 
       {/* Contact Section */}
-      <SectionWrapper id="contact">
-        <h2 className="section-title reveal">Get In <span>Touch</span></h2>
-        <div className="grid-2">
+      <SectionWrapper id="contact" className="overflow-hidden">
+        {/* Decorative Audio/Waveform Background */}
+        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
+           <WaveformAnim />
+        </div>
+        <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Get In <span>Touch</span></h2>
+        <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
           <form onSubmit={handleFormSubmit} className="glass-card reveal" style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
             <div style={{ position: 'relative', marginTop: '10px' }}>
               <input 
@@ -422,14 +446,14 @@ export default function App() {
               ></textarea>
               <label htmlFor="contact-message" className="fancy-label">Message</label>
             </div>
-            <PaperPlaneButton 
+            <button 
               type="submit" 
               disabled={status === 'Sending...'}
-              isSending={status === 'Sending...'}
-              isSuccess={status.includes('successfully')}
+              className="btn-primary"
+              style={{ width: '100%', marginTop: '16px', padding: '16px', fontSize: '1rem' }}
             >
-              Send Message
-            </PaperPlaneButton>
+              {status === 'Sending...' ? 'Sending...' : 'Send Message'}
+            </button>
             {status && status !== 'Sending...' && (
               <p style={{ marginTop: "8px", fontSize: "0.9rem", color: status.includes('successfully') ? "var(--accent-emerald)" : "#ef4444", textAlign: "center" }}>
                 {status}

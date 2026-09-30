@@ -70,37 +70,32 @@ export default function ParticleBackground() {
       }
 
       update() {
-        // Move particles
-        if (this.x > canvas!.width || this.x < 0) {
-          this.directionX = -this.directionX;
+        // Move particles (data flow left to right)
+        if (this.x > canvas!.width) {
+          this.x = 0;
+          this.y = Math.random() * canvas!.height;
+        }
+        if (this.x < 0) {
+          this.x = canvas!.width;
         }
         if (this.y > canvas!.height || this.y < 0) {
           this.directionY = -this.directionY;
         }
         
-        // Mouse collision
+        // Mouse collision (Neural activation)
         if (mouse.x != null && mouse.y != null) {
           let dx = mouse.x - this.x;
           let dy = mouse.y - this.y;
           let distance = Math.sqrt(dx*dx + dy*dy);
           
-          if (distance < mouse.radius + this.size) {
-            if (mouse.x < this.x && this.x < canvas!.width - this.size * 10) {
-              this.x += 1;
-              this.directionX = -this.directionX;
-            }
-            if (mouse.x > this.x && this.x > this.size * 10) {
-              this.x -= 1;
-              this.directionX = -this.directionX;
-            }
-            if (mouse.y < this.y && this.y < canvas!.height - this.size * 10) {
-              this.y += 1;
-              this.directionY = -this.directionY;
-            }
-            if (mouse.y > this.y && this.y > this.size * 10) {
-              this.y -= 1;
-              this.directionY = -this.directionY;
-            }
+          if (distance < mouse.radius) {
+            const forceDirectionX = dx / distance;
+            const forceDirectionY = dy / distance;
+            const force = (mouse.radius - distance) / mouse.radius;
+            
+            // Attract slightly to mouse
+            this.x += forceDirectionX * force * 1.5;
+            this.y += forceDirectionY * force * 1.5;
           }
         }
         
@@ -114,15 +109,16 @@ export default function ParticleBackground() {
 
     const init = () => {
       particlesArray = [];
-      const calculatedCount = Math.floor((canvas.height * canvas.width) / 24000);
-      const numberOfParticles = Math.min(45, Math.max(20, calculatedCount));
+      const calculatedCount = Math.floor((canvas.height * canvas.width) / 12000); // Much denser neural net
+      const numberOfParticles = Math.min(100, Math.max(40, calculatedCount));
       for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
-        let x = (Math.random() * ((innerWidth - size * 2) - (size * 2)) + size * 2);
-        let y = (Math.random() * ((innerHeight - size * 2) - (size * 2)) + size * 2);
-        let directionX = (Math.random() * 0.4) - 0.2;
-        let directionY = (Math.random() * 0.4) - 0.2;
-        let color = 'rgba(6, 182, 212, 0.5)'; // accent-cyan
+        let x = Math.random() * innerWidth;
+        let y = Math.random() * innerHeight;
+        let directionX = (Math.random() * 0.8) + 0.1; // Flow right
+        let directionY = (Math.random() * 0.4) - 0.2; // Slight vertical drift
+        let isPurple = Math.random() > 0.7;
+        let color = isPurple ? 'rgba(138, 43, 226, 0.7)' : 'rgba(0, 240, 255, 0.7)'; // purple and cyan
         particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
       }
     };
@@ -136,7 +132,7 @@ export default function ParticleBackground() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    const maxDistanceSquared = 120 * 120;
+    const maxDistanceSquared = 140 * 140;
 
     const connect = () => {
       for (let a = 0; a < particlesArray.length; a++) {
@@ -145,12 +141,30 @@ export default function ParticleBackground() {
           let dy = particlesArray[a].y - particlesArray[b].y;
           let distance = dx * dx + dy * dy;
           if (distance < maxDistanceSquared) {
-            let opacityValue = (1 - (distance / maxDistanceSquared)) * 0.2;
-            ctx.strokeStyle = `rgba(6, 182, 212, ${opacityValue})`;
-            ctx.lineWidth = 1;
+            let opacityValue = (1 - (distance / maxDistanceSquared)) * 0.3;
+            ctx.strokeStyle = `rgba(0, 240, 255, ${opacityValue})`;
+            ctx.lineWidth = 0.8;
             ctx.beginPath();
             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
             ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+      
+      // Connect to mouse to show ML node activation
+      if (mouse.x != null && mouse.y != null) {
+        for (let a = 0; a < particlesArray.length; a++) {
+          let dx = particlesArray[a].x - mouse.x;
+          let dy = particlesArray[a].y - mouse.y;
+          let distance = dx * dx + dy * dy;
+          if (distance < maxDistanceSquared) {
+            let opacityValue = (1 - (distance / maxDistanceSquared)) * 0.5;
+            ctx.strokeStyle = `rgba(138, 43, 226, ${opacityValue})`; // purple connection to mouse
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+            ctx.lineTo(mouse.x, mouse.y);
             ctx.stroke();
           }
         }

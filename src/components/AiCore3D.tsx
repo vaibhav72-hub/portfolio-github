@@ -174,7 +174,7 @@ const AiCore3D: React.FC<AiCore3DProps> = ({ status = 'idle' }) => {
   }, []);
 
   return (
-    <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }}>
+    <div style={{ width: '100%', height: '400px', position: 'relative', zIndex: 10 }} role="img" aria-label="3D AI Core Particle Animation">
       <Canvas dpr={1} camera={{ position: [0, 0, 5], fov: 60 }}>
         <ambientLight intensity={0.5} />
         <ParticleSphere status={status} />

@@ -67,7 +67,6 @@ const AnimatedNav = () => {
             fontWeight: 500,
             transition: 'color 0.3s ease',
             zIndex: 1,
-            outline: 'none',
           }}
         >
           {activeSection === link.href && (
