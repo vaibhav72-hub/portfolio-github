@@ -1,7 +1,7 @@
 import React, { useState, useEffect, Suspense, lazy } from 'react';
 import { 
   ArrowRight, ExternalLink, Mail, MapPin, 
-  Phone, Award, Code, Database, LineChart, Cpu, Terminal
+  Phone, Award, Terminal, Network, Activity, Brain, Cpu, Quote
 } from 'lucide-react';
 import './index.css';
 import MagneticButton from './components/MagneticButton';
@@ -31,27 +31,27 @@ const LinkedinIcon = ({ className }: { className?: string }) => (
 const SKILLS = [
   {
     category: "Core Programming",
-    icon: <Code className="w-6 h-6 mb-4 text-[#06B6D4]" />,
+    icon: <Terminal className="w-6 h-6 mb-4 text-[#06B6D4]" />,
     items: ["Python", "R", "C++", "JavaScript"]
   },
   {
     category: "Data Engineering",
-    icon: <Database className="w-6 h-6 mb-4 text-[#06B6D4]" />,
+    icon: <Network className="w-6 h-6 mb-4 text-[#06B6D4]" />,
     items: ["MySQL", "REST APIs", "ETL Automation", "Geospatial Data"]
   },
   {
     category: "BI & Analytics",
-    icon: <LineChart className="w-6 h-6 mb-4 text-[#06B6D4]" />,
+    icon: <Activity className="w-6 h-6 mb-4 text-[#06B6D4]" />,
     items: ["Power BI", "DAX", "Qlik Sense", "Advanced Excel"]
   },
   {
     category: "AI, ML & GenAI",
-    icon: <Cpu className="w-6 h-6 mb-4 text-[#06B6D4]" />,
+    icon: <Brain className="w-6 h-6 mb-4 text-[#06B6D4]" />,
     items: ["Scikit-Learn", "TensorFlow", "Hugging Face", "LLMs", "NLP"]
   },
   {
     category: "Developer Tools",
-    icon: <Terminal className="w-6 h-6 mb-4 text-[#06B6D4]" />,
+    icon: <Cpu className="w-6 h-6 mb-4 text-[#06B6D4]" />,
     items: ["VS Code", "Jupyter", "Git/GitHub", "Anaconda"]
   }
 ];
@@ -212,13 +212,13 @@ export default function App() {
 
 
   return (
-    <div className="app-container">
+    <main className="app-container">
       <CursorTrail />
       {/* Navigation */}
       <nav>
         <div className="container nav-content">
           <a href="#" className="logo" style={{ color: "var(--text-primary)", fontWeight: "bold", fontSize: "1.2rem" }}>
-            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)" }}>| Data & AI</span>
+            Vaibhav Pernole <span style={{ color: "var(--accent-cyan)" }}>| B.Tech AI & ML</span>
           </a>
           <div className="nav-links">
             <AnimatedNav />
@@ -236,7 +236,23 @@ export default function App() {
         </Suspense>
         <div className="container" style={{ display: "flex", alignItems: "center", gap: "40px", flexWrap: "wrap-reverse" }}>
           <div style={{ flex: "1 1 600px", position: "relative", zIndex: 10 }}>
-            <div className="badge" style={{ marginBottom: "24px", marginTop: "60px" }}>B.Tech AI & ML | Data Analyst & AI & ML Developer</div>
+            <div className="floating-element" style={{ 
+              display: 'inline-flex', 
+              alignItems: 'center', 
+              gap: '8px', 
+              padding: '8px 16px', 
+              borderRadius: '9999px', 
+              border: '1px solid var(--accent-cyan)', 
+              backgroundColor: 'rgba(0, 240, 255, 0.05)', 
+              boxShadow: '0 0 15px rgba(0, 240, 255, 0.2)',
+              color: 'var(--accent-cyan)',
+              fontWeight: 500,
+              fontSize: '0.95rem',
+              marginBottom: '24px', 
+              marginTop: '60px' 
+            }}>
+              <Cpu className="w-4 h-4" style={{ color: 'var(--accent-cyan)' }} /> Ready for Opportunities
+            </div>
             <h1 className="hero-title-anim" style={{ margin: 0, padding: 0, fontSize: "clamp(1.5rem, 3.5vw, 2.5rem)", marginBottom: "24px", fontWeight: "bold", lineHeight: 1.3 }}>
               <span className="text-gradient">
                 Architecting Scalable Data Pipelines, Interactive BI Ecosystems, and Applied ML Models.
@@ -281,6 +297,33 @@ export default function App() {
 
       {/* About Section */}
       <SectionWrapper id="about">
+        <div className="reveal" style={{ maxWidth: '800px', margin: '0 auto 40px auto', textAlign: 'center' }}>
+          <div className="glass-card" style={{ 
+            display: 'inline-flex', 
+            alignItems: 'flex-start', 
+            gap: '20px', 
+            padding: '32px 40px', 
+            borderRadius: '24px',
+            borderTop: '1px solid rgba(0, 240, 255, 0.2)',
+            borderBottom: '1px solid rgba(138, 43, 226, 0.2)',
+            background: 'linear-gradient(135deg, rgba(0, 240, 255, 0.03), rgba(138, 43, 226, 0.03))'
+          }}>
+            <Quote className="w-10 h-10 floating-element" style={{ color: 'var(--accent-cyan)', flexShrink: 0, opacity: 0.8 }} />
+            <p style={{ 
+              fontStyle: 'italic', 
+              fontSize: '1.3rem', 
+              color: 'var(--text-primary)',
+              margin: 0,
+              fontWeight: 500,
+              letterSpacing: '0.02em',
+              lineHeight: 1.6,
+              textAlign: 'left'
+            }}>
+              "Knowledge is not a destination; it is a lifelong discipline of curiosity, reflection, and creation."
+            </p>
+          </div>
+        </div>
+
         <h2 className="section-title reveal">Executive <span>Summary</span></h2>
         <div className="grid-2">
           <div className="glass-card reveal">
@@ -513,7 +556,7 @@ export default function App() {
           </div>
         </div>
       </footer>
-    </div>
+    </main>
   );
 }
 
