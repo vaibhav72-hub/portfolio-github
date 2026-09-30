@@ -28,8 +28,8 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
   const materialRef = useRef<THREE.PointsMaterial>(null);
   const linesMaterialRef = useRef<THREE.LineBasicMaterial>(null);
   
-  const count = 50; // reduced number of nodes for better performance
-  const maxDistance = 0.6; // reduced line connection distance
+  const count = 150; // Increased number of nodes for a richer, denser core
+  const maxDistance = 0.65; // Slightly increased line connection distance
 
   const { positions, linePositions, lineColors } = useMemo(() => {
     const positions = new Float32Array(count * 3);
