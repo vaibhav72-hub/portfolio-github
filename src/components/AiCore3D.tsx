@@ -82,7 +82,11 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
 
   const targetColor = useMemo(() => getColorsForStatus(status), [status]);
 
+  const timeRef = useRef(0);
+
   useFrame((state, delta) => {
+    timeRef.current += delta;
+
     if (groupRef.current) {
       // Base rotation
       let rotSpeedY = 0.1;
@@ -107,7 +111,7 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
       groupRef.current.rotation.y += delta * rotSpeedY;
       groupRef.current.rotation.x += delta * rotSpeedX;
       
-      const scale = 1 + Math.sin(state.clock.elapsedTime * pulseSpeed) * pulseIntensity;
+      const scale = 1 + Math.sin(timeRef.current * pulseSpeed) * pulseIntensity;
       groupRef.current.scale.set(scale, scale, scale);
 
       // Smooth color transition
