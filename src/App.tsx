@@ -10,6 +10,7 @@ import FlipCard, { type CertData } from './components/FlipCard';
 
 import CursorTrail from './components/CursorTrail';
 import AnimatedNav from './components/AnimatedNav';
+import SubmitButton from './components/SubmitButton';
 const NeuralNetworkAnim = lazy(() => import('./components/NeuralNetworkAnim'));
 const AiScannerAnim = lazy(() => import('./components/AiScannerAnim'));
 const AiOrbitAnim = lazy(() => import('./components/AiOrbitAnim'));
@@ -489,14 +490,7 @@ export default function App() {
               ></textarea>
               <label htmlFor="contact-message" className="fancy-label">Message</label>
             </div>
-            <button 
-              type="submit" 
-              disabled={status === 'Sending...'}
-              className="btn-primary"
-              style={{ width: '100%', marginTop: '16px', padding: '16px', fontSize: '1rem' }}
-            >
-              {status === 'Sending...' ? 'Sending...' : 'Send Message'}
-            </button>
+            <SubmitButton status={status} />
             {status && status !== 'Sending...' && (
               <p style={{ marginTop: "8px", fontSize: "0.9rem", color: status.includes('successfully') ? "var(--accent-emerald)" : "#ef4444", textAlign: "center" }}>
                 {status}
