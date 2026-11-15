@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -20,13 +27,13 @@ const DataPipelineAnim: React.FC = () => {
   return (
     <div style={{ width: '100%', height: '100%', opacity: 0.3, pointerEvents: 'none' }}>
       <svg viewBox="0 0 100 100" width="100%" height="100%" preserveAspectRatio="xMidYMid meet">
-        
+
         {/* Draw Paths */}
         {paths.map(path => (
           <g key={path.id}>
             {/* Background Path */}
             <path d={path.d} stroke="rgba(255,255,255,0.05)" strokeWidth="0.5" fill="none" />
-            
+
             {/* Glowing Pulse traveling along the path */}
             {/* Framer motion doesn't natively animate along SVG paths easily without complex plugins, 
                 but we can animate strokeDasharray/strokeDashoffset for a cool laser beam effect */}

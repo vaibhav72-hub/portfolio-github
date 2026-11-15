@@ -3,6 +3,13 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
 
+// Suppress THREE.Clock deprecation warning caused by internal @react-three/fiber / drei usage
+const originalWarn = console.warn;
+console.warn = (...args: any[]) => {
+  if (typeof args[0] === 'string' && args[0].includes('THREE.Clock: This module has been deprecated')) return;
+  originalWarn(...args);
+};
+
 export type AiStatus = 'idle' | 'listening' | 'thinking' | 'speaking';
 
 const getColorsForStatus = (status: AiStatus) => {
