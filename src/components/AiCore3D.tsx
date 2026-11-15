@@ -91,7 +91,7 @@ const ParticleSphere: React.FC<ParticleSphereProps> = ({ status }) => {
 
   const timeRef = useRef(0);
 
-  useFrame((state, delta) => {
+  useFrame((_, delta) => {
     timeRef.current += delta;
 
     if (groupRef.current) {
