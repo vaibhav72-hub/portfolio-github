@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { useState, useEffect, Suspense, lazy, useRef } from 'react';
 import { 
   ArrowRight, ExternalLink, Mail, MapPin, 
   Phone, Award, Terminal, Network, Activity, Brain, Cpu, Quote
@@ -146,6 +146,30 @@ const CERTS: CertData[] = [
 ];
 
 // --- Components ---
+const LazyAnimation = ({ children }: { children: React.ReactNode }) => {
+  const [inView, setInView] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '250px' });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} style={{ width: '100%', height: '100%' }}>
+      {inView ? children : null}
+    </div>
+  );
+};
+
 const SectionWrapper = ({ children, id, className = "" }: { children: React.ReactNode, id: string, className?: string }) => (
   <section id={id} className={`section ${className}`} style={{ position: 'relative' }}>
     <div className="container">
@@ -157,6 +181,23 @@ const SectionWrapper = ({ children, id, className = "" }: { children: React.Reac
 export default function App() {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
   const [status, setStatus] = useState('');
+  const [mount3D, setMount3D] = useState(false);
+
+  useEffect(() => {
+    // Delay heavy 3D WebGL initialization until after initial paint & main thread is idle
+    if ('requestIdleCallback' in window) {
+      const handle = (window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback?.(
+        () => setMount3D(true),
+        { timeout: 1000 }
+      );
+      return () => {
+        if (handle) (window as Window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(handle);
+      };
+    } else {
+      const timer = setTimeout(() => setMount3D(true), 300);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries, obs) => {
@@ -288,10 +329,14 @@ export default function App() {
             </div>
           </div>
           
-          <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10 }}>
-            <Suspense fallback={<div style={{ width: '100%', height: '400px' }} />}>
-              <AiCore3D />
-            </Suspense>
+          <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10, minHeight: "400px" }}>
+            {mount3D ? (
+              <Suspense fallback={<div style={{ width: '100%', height: '400px' }} />}>
+                <AiCore3D />
+              </Suspense>
+            ) : (
+              <div style={{ width: '100%', height: '400px' }} />
+            )}
           </div>
         </div>
       </section>
@@ -352,7 +397,7 @@ export default function App() {
       <SectionWrapper id="skills" className="overflow-hidden">
         {/* Decorative ML Background */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <Suspense fallback={null}><NeuralNetworkAnim /></Suspense>
+           <LazyAnimation><Suspense fallback={null}><NeuralNetworkAnim /></Suspense></LazyAnimation>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Technical <span>Skills Matrix</span></h2>
         <div className="grid-3" style={{ position: 'relative', zIndex: 1 }}>
@@ -374,7 +419,7 @@ export default function App() {
       <SectionWrapper id="experience" className="overflow-hidden">
         {/* Decorative Data Pipeline Background */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.2, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <Suspense fallback={null}><DataPipelineAnim /></Suspense>
+           <LazyAnimation><Suspense fallback={null}><DataPipelineAnim /></Suspense></LazyAnimation>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Work <span>Experience</span></h2>
         <div className="glass-card reveal" style={{ maxWidth: "800px", margin: "0 auto", position: "relative", paddingLeft: "48px", zIndex: 1 }}>
@@ -403,7 +448,7 @@ export default function App() {
       <SectionWrapper id="projects" className="overflow-hidden">
         {/* Decorative AI Background */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <Suspense fallback={null}><AiScannerAnim /></Suspense>
+           <LazyAnimation><Suspense fallback={null}><AiScannerAnim /></Suspense></LazyAnimation>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Featured <span>Work</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
@@ -441,7 +486,7 @@ export default function App() {
       <SectionWrapper id="credentials" className="overflow-hidden">
         {/* Decorative AI Orbit Background */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.25, pointerEvents: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-           <Suspense fallback={null}><AiOrbitAnim /></Suspense>
+           <LazyAnimation><Suspense fallback={null}><AiOrbitAnim /></Suspense></LazyAnimation>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Credentials <span>& Certifications</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>
@@ -457,7 +502,7 @@ export default function App() {
       <SectionWrapper id="contact" className="overflow-hidden">
         {/* Decorative Audio/Waveform Background */}
         <div aria-hidden="true" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: 0.15, pointerEvents: 'none', display: 'flex', alignItems: 'flex-end', justifyContent: 'center' }}>
-           <Suspense fallback={null}><WaveformAnim /></Suspense>
+           <LazyAnimation><Suspense fallback={null}><WaveformAnim /></Suspense></LazyAnimation>
         </div>
         <h2 className="section-title reveal" style={{ position: 'relative', zIndex: 1 }}>Get In <span>Touch</span></h2>
         <div className="grid-2" style={{ position: 'relative', zIndex: 1 }}>

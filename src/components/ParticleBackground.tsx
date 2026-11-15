@@ -107,10 +107,12 @@ export default function ParticleBackground() {
 
     let animationFrameId: number;
 
+    const isMobile = window.innerWidth < 768;
+
     const init = () => {
       particlesArray = [];
-      const calculatedCount = Math.floor((canvas.height * canvas.width) / 12000); // Much denser neural net
-      const numberOfParticles = Math.min(100, Math.max(40, calculatedCount));
+      const calculatedCount = Math.floor((canvas.height * canvas.width) / 16000);
+      const numberOfParticles = isMobile ? 20 : Math.min(50, Math.max(25, calculatedCount));
       for (let i = 0; i < numberOfParticles; i++) {
         let size = (Math.random() * 2) + 1;
         let x = Math.random() * innerWidth;
@@ -124,15 +126,18 @@ export default function ParticleBackground() {
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, innerWidth, innerHeight);
-      for (let i = 0; i < particlesArray.length; i++) {
-        particlesArray[i].update();
+      if (!document.hidden) {
+        ctx.clearRect(0, 0, innerWidth, innerHeight);
+        for (let i = 0; i < particlesArray.length; i++) {
+          particlesArray[i].update();
+        }
+        connect();
       }
-      connect();
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    const maxDistanceSquared = 140 * 140;
+    const maxDistance = isMobile ? 90 : 120;
+    const maxDistanceSquared = maxDistance * maxDistance;
 
     const connect = () => {
       for (let a = 0; a < particlesArray.length; a++) {

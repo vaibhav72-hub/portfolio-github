@@ -3,8 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const CursorTrail: React.FC = () => {
   const [trail, setTrail] = useState<{ x: number; y: number; id: number }[]>([]);
+  const [isPointerDevice, setIsPointerDevice] = useState(false);
 
   useEffect(() => {
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+    setIsPointerDevice(true);
+
     let idCounter = 0;
     let lastTime = 0;
     
@@ -32,6 +36,8 @@ const CursorTrail: React.FC = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
+
+  if (!isPointerDevice) return null;
 
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, pointerEvents: 'none', zIndex: 9999, width: '100%', height: '100%' }}>
