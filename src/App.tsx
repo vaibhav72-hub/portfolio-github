@@ -146,6 +146,42 @@ const CERTS: CertData[] = [
 ];
 
 // --- Components ---
+const GlobeFallback = () => (
+  <div style={{ width: '100%', height: '400px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+    <div style={{
+      width: '240px',
+      height: '240px',
+      borderRadius: '50%',
+      border: '1px dashed rgba(0, 240, 255, 0.35)',
+      boxShadow: '0 0 35px rgba(0, 240, 255, 0.15), inset 0 0 25px rgba(138, 43, 226, 0.15)',
+      animation: 'spin-orbit 14s linear infinite',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <div style={{
+        width: '180px',
+        height: '180px',
+        borderRadius: '50%',
+        border: '1px dotted rgba(138, 43, 226, 0.45)',
+        animation: 'spin-orbit 9s linear infinite reverse',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{
+          width: '12px',
+          height: '12px',
+          borderRadius: '50%',
+          backgroundColor: '#00F0FF',
+          boxShadow: '0 0 15px #00F0FF'
+        }} />
+      </div>
+    </div>
+  </div>
+);
+
 const LazyAnimation = ({ children }: { children: React.ReactNode }) => {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -184,19 +220,9 @@ export default function App() {
   const [mount3D, setMount3D] = useState(false);
 
   useEffect(() => {
-    // Delay heavy 3D WebGL initialization until after initial paint & main thread is idle
-    if ('requestIdleCallback' in window) {
-      const handle = (window as Window & { requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number }).requestIdleCallback?.(
-        () => setMount3D(true),
-        { timeout: 1000 }
-      );
-      return () => {
-        if (handle) (window as Window & { cancelIdleCallback?: (id: number) => void }).cancelIdleCallback?.(handle);
-      };
-    } else {
-      const timer = setTimeout(() => setMount3D(true), 300);
-      return () => clearTimeout(timer);
-    }
+    // Start loading 3D core right after first paint
+    const timer = setTimeout(() => setMount3D(true), 50);
+    return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -331,11 +357,11 @@ export default function App() {
           
           <div style={{ flex: "1 1 300px", display: "flex", justifyContent: "center", alignItems: "center", position: "relative", zIndex: 10, minHeight: "400px" }}>
             {mount3D ? (
-              <Suspense fallback={<div style={{ width: '100%', height: '400px' }} />}>
+              <Suspense fallback={<GlobeFallback />}>
                 <AiCore3D />
               </Suspense>
             ) : (
-              <div style={{ width: '100%', height: '400px' }} />
+              <GlobeFallback />
             )}
           </div>
         </div>
